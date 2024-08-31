@@ -6,10 +6,12 @@ function buttonClicked() {
 
 // SETUP
 
-var numbers = ['01', '01', '01', '02', '02', '02', '14', '14', '14', '15', '15', '15', '03', '03', '03', '03', '13', '13', '13', '13', '04', '04', '04', '04', '04', '12', '12', '12', '12', '12', '05', '05', '05', '05', '05', '05', '11', '11', '11', '11', '11', '11', '06', '06', '06', '06', '06', '06', '06', '10', '10', '10', '10', '10', '10', '10', '07', '07', '07', '07', '07', '07', '07', '07', '09', '09', '09', '09', '09', '09', '09', '09', '08', '08', '08', '08', '08', '08', '08', '08', '08'];
+var numbers_home = ['01', '01', '01', '02', '02', '02', '14', '14', '14', '15', '15', '15', '03', '03', '03', '03', '13', '13', '13', '13', '04', '04', '04', '04', '04', '12', '12', '12', '12', '12', '05', '05', '05', '05', '05', '05', '11', '11', '11', '11', '11', '11', '06', '06', '06', '06', '06', '06', '06', '10', '10', '10', '10', '10', '10', '10', '07', '07', '07', '07', '07', '07', '07', '07', '09', '09', '09', '09', '09', '09', '09', '09', '08', '08', '08', '08', '08', '08', '08', '08', '08'];
 var face_home = ['Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier'];
-var face_vegas = [];
-var face_moon = [];
+var numbers_vegas = ['1','2','14','15','1','2','14','15','1','2','14','15','1','2','14','15','3','13','3','13','3','13','3','13','4','12','4','12','4','12','4','12','4','12','5','11','5','11','5','11','5','11','5','11','5','11','6','10','6','10','6','10','6','10','6','10','6','10','6','10','7','9','7','9','7','9','7','9','7','9','7','9','7','9','7','9','8','8','8','8','8','8','8','8','8'];
+var face_vegas = ['Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Amélioration'];
+var numbers_moon = ['1','2','14','15','1','2','14','15','3','13','3','13','3','13','4','12','4','12','4','12','4','12','5','11','5','11','5','11','5','11','5','11','6','10','6','10','6','10','6','10','6','10','6','10','7','9','7','9','7','9','7','9','7','9','7','9','8','8','8','8','8','8','8'];
+var face_moon = ['Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante'];
 var card2 = [];
 
 var Deck1 = [];
@@ -32,7 +34,7 @@ function option_choosen() {
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("d-none");
         
-        CardList1 = numbers;
+        CardList1 = numbers_home;
         CardList2 = face_home;
         
         refillCards(1);
@@ -41,7 +43,7 @@ function option_choosen() {
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
         
-        CardList1 = numbers;
+        CardList1 = numbers_vegas;
         CardList2 = face_vegas;
         
         refillCards(1);
@@ -50,7 +52,7 @@ function option_choosen() {
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
         
-        CardList1 = numbers;
+        CardList1 = numbers_moon;
         CardList2 = face_moon;
         
         refillCards(1);
