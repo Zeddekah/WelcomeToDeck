@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+    <head>
+
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Welcome To Deck</title>
+
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js"></script>
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous" />
+
+        <link rel="stylesheet" href="style.min.css" />
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
+            crossorigin="anonymous">
+        </script>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <div class="display-4 page-title">Welcome To Deck</div>
+
+                <p class="lead">For playing to "Welcome To" without the cards ... and more !
+                (inspired by https://github.com/pwlinkas/virtudeck)</p>
+
+                <form id="choose_option" onsubmit="option_choosen();">
+                    <select name="usage" id="usage_select">
+                      <option value="">--Please choose an option--</option>
+                      <option value="welcome_home">Welcome to your perfect home</option>
+                      <option value="welcome_vegas">Welcome to Vegas</option>
+                      <option value="welcome_moon">Welcome to the Moon</option>
+                      <option value="">------</option>
+                      <option value="custom">Custom (WIP)</option>
+                    </select>
+                    <button type="button" onclick="option_choosen();">Go!</button>
+                </form>
+                
+            </div>
+
+            <div class="game-setup">
+                                
+                <form id="setup" onsubmit="manual_setup();" class="d-none">
+                    
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="setup-card-content1">Card content 1</label>
+                        <textarea class="form-control" id="setup-card-content1" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setup-card-content2">Card content 2</label>
+                        <textarea class="form-control" id="setup-card-content2" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <small class="form-text text-muted">One card per line. Supports basic HTML.</small>
+                        <button type="button" class="btn btn-lg btn-success" onclick="manual_setup();">Go!</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div id="deck" class="deck d-none">
+                
+                <hr />
+                
+                <p>
+                    <button class="btn btn-lg btn-success" onclick="drawCard();">Draw a card</button>
+                </p>
+                
+                <hr />
+
+                <div class="active-card">
+
+                    <p id="card-text" class="active-card-text"></p>
+
+                </div>
+
+                
+
+            </div>
+
+
+        </div>
+    </body>
+
+      
+</html>
