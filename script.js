@@ -26,6 +26,7 @@ function setupToggleHide() {
 function option_choosen() {
     document.getElementById("deck").classList.add("d-none");
     document.getElementById("setup").classList.add("d-none");
+    document.getElementById("tirage").classList.add("d-none");
     document.getElementById("card-text").innerHTML = "";
 
 
@@ -33,8 +34,9 @@ function option_choosen() {
     
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("tirage").classList.add("d-none");
+        document.getElementById("PDF_div").classList.remove("d-none");
         document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-your-perfect-home-regle.pdf";
-        //document.getElementById['PDF'].src = "/welcome-to-your-perfect-home-regle.pdf";
         
         CardList1 = numbers_home;
         CardList2 = face_home;
@@ -44,8 +46,9 @@ function option_choosen() {
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("tirage").classList.add("d-none");
+        document.getElementById("PDF_div").classList.remove("d-none");
         document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-new-las-vegas-regle.pdf";
-        //document.getElementById['PDF'].src = "/welcome-to-new-las-vegas-regle.pdf";
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
@@ -55,8 +58,9 @@ function option_choosen() {
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("tirage").classList.add("d-none");
+        document.getElementById("PDF_div").classList.remove("d-none");
         document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-the-moon-regle.pdf";
-        //document.getElementById['PDF'].src = "/welcome-to-the-moon-regle.pdf";
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
@@ -65,8 +69,10 @@ function option_choosen() {
         refillCards(2);
     }
     else if (UsageSelect == "custom") {
-        document.getElementById("setup").classList.toggle("d-none");
-        document.getElementById['PDF'].src = "/";
+        document.getElementById("setup").classList.remove("d-none");
+        document.getElementById("tirage").classList.add("d-none");
+        document.getElementById("PDF_div").classList.add("d-none");
+        document.getElementById("PDF").contentWindow.document.location.href="";
     }
 }
 
@@ -142,6 +148,7 @@ function shuffle(a) {
 // GAME
 
 function drawCard() {
+    document.getElementById("tirage").classList.remove("d-none");
     
     if (document.getElementById("usage_select").value == "custom") {
         custom_draw();
