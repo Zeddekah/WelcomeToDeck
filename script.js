@@ -33,6 +33,8 @@ function option_choosen() {
     
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-your-perfect-home-regle.pdf";
+        //document.getElementById['PDF'].src = "/welcome-to-your-perfect-home-regle.pdf";
         
         CardList1 = numbers_home;
         CardList2 = face_home;
@@ -42,6 +44,8 @@ function option_choosen() {
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-new-las-vegas-regle.pdf";
+        //document.getElementById['PDF'].src = "/welcome-to-new-las-vegas-regle.pdf";
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
@@ -51,6 +55,8 @@ function option_choosen() {
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-the-moon-regle.pdf";
+        //document.getElementById['PDF'].src = "/welcome-to-the-moon-regle.pdf";
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
@@ -60,6 +66,7 @@ function option_choosen() {
     }
     else if (UsageSelect == "custom") {
         document.getElementById("setup").classList.toggle("d-none");
+        document.getElementById['PDF'].src = "/";
     }
 }
 
