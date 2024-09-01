@@ -19,6 +19,17 @@ var CardList1 = [];
 var Deck2 = [];
 var CardList2 = [];
 
+{
+  var OSName = "Unknown OS";
+  if (navigator.userAgent.indexOf("Win") != -1) OSName = "Windows";
+  if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
+  if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
+  if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
+  if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
+  console.log('Your OS: ' + OSName);
+}
+
+
 function setupToggleHide() {
     document.getElementById("setup").classList.toggle("d-none");
 }
@@ -43,6 +54,19 @@ function option_choosen() {
         
         refillCards(1);
         refillCards(2);
+        
+        if (OSName == "iOS") {
+            document.getElementById("app_link").innerHTML="<a href='https://apps.apple.com/app/id1358077007'>
+                          <span>Download on the</span>
+                          <span>App Store</span>
+                        </a>";
+        }
+        else if (OSName = "Android") {
+            document.getElementById("app_link").innerHTML="<a href='https://play.google.com/store/apps/details?id=com.bluecocker.welcome'>
+              <span>Download on the</span>
+              <span>Android Store</span>
+            </a>";
+        }
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
@@ -55,6 +79,19 @@ function option_choosen() {
         
         refillCards(1);
         refillCards(2);
+        
+        if (OSName == "iOS") {
+                    document.getElementById("app_link").innerHTML="<a href='https://apps.apple.com/app/id1507403095'>
+                                  <span>Download on the</span>
+                                  <span>App Store</span>
+                                </a>";
+                }
+                else if (OSName = "Android") {
+                    document.getElementById("app_link").innerHTML="<a href='https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas'>
+                      <span>Download on the</span>
+                      <span>Android Store</span>
+                    </a>";
+                }
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
