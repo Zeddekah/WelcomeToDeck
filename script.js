@@ -19,15 +19,13 @@ var CardList1 = [];
 var Deck2 = [];
 var CardList2 = [];
 
-{
-  var OSName = "Unknown OS";
-  if (navigator.userAgent.indexOf("Win") != -1) OSName = "Windows";
-  if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
-  if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
-  if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
-  if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
-  console.log('Your OS: ' + OSName);
-}
+var OSName = "Unknown OS";
+if (navigator.userAgent.indexOf("Win") != -1) OSName = "Windows";
+if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
+if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
+if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
+if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
+console.log('Your OS: ' + OSName);
 
 
 function setupToggleHide() {
@@ -56,16 +54,17 @@ function option_choosen() {
         refillCards(2);
         
         if (OSName == "iOS") {
-            document.getElementById("app_link").innerHTML="<a href='https://apps.apple.com/app/id1358077007'>
-                          <span>Download on the</span>
-                          <span>App Store</span>
-                        </a>";
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/App_store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
         }
-        else if (OSName = "Android") {
-            document.getElementById("app_link").innerHTML="<a href='https://play.google.com/store/apps/details?id=com.bluecocker.welcome'>
-              <span>Download on the</span>
-              <span>Android Store</span>
-            </a>";
+        else if (OSName == "Android") {
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome") + "<hr />";
+        }
+        else {
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/App_store.svg></img>".link("https://apps.apple.com/app/id1358077007");
+            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
         }
     }
     else if (UsageSelect == "welcome_vegas") {
@@ -81,17 +80,18 @@ function option_choosen() {
         refillCards(2);
         
         if (OSName == "iOS") {
-                    document.getElementById("app_link").innerHTML="<a href='https://apps.apple.com/app/id1507403095'>
-                                  <span>Download on the</span>
-                                  <span>App Store</span>
-                                </a>";
-                }
-                else if (OSName = "Android") {
-                    document.getElementById("app_link").innerHTML="<a href='https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas'>
-                      <span>Download on the</span>
-                      <span>Android Store</span>
-                    </a>";
-                }
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1507403095") + "<hr />";
+        }
+        else if (OSName == "Android") {
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas") + "<hr />";
+        }
+        else {
+            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
+            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img>".link("https://apps.apple.com/app/id1507403095");
+            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
+        }
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
