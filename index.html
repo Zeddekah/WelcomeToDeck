@@ -97,11 +97,13 @@
                 
                 <div id="PDF_div" class="d-none text-center">
                     <hr />
-                    <h4>Règles</h4>
+                    <h4>Livret de règles</h4>
                     <!-- <iframe title="PDF" id="PDF" width="100%" height="500px"> </iframe> -->
-                    <object data="/PDF/welcome-to-new-las-vegas-regle.pdf" type="application/pdf"  width="100%" height="400">
-                        <embed title="PDF" id="PDF" src="/PDF/welcome-to-new-las-vegas-regle.pdf" type="application/pdf" />
-                    </object>
+                        <object id="PDF_object"  title="Object after Download" data="/PDF/welcome-to-the-moon-regle.pdf" type="application/pdf">
+                            <embed title="PDF" id="PDF" src="/PDF/welcome-to-new-las-vegas-regle.pdf" type="application/pdf" />
+                            <p>Oops! Your browser doesn't support this PDF viewer!</p>
+                            <p><a id="download_PDF" href="/PDF/welcome-to-the-moon-regle.pdf">Download Instead</a></p>
+                        </object>
                 </div>
 
             </div>

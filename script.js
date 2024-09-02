@@ -67,7 +67,7 @@ function option_choosen() {
         
         document.getElementById("PDF_div").classList.remove("d-none");
         //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-your-perfect-home-regle.pdf";
-        replace_PDF("/PDF/welcome-to-your-perfect-home-regle.pdf");
+        //replace_PDF("/PDF/welcome-to-your-perfect-home-regle.pdf");
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
@@ -95,7 +95,7 @@ function option_choosen() {
         
         document.getElementById("PDF_div").classList.remove("d-none");
         //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-new-las-vegas-regle.pdf";
-        replace_PDF("/PDF/welcome-to-new-las-vegas-regle.pdf");
+        //replace_PDF("/PDF/welcome-to-new-las-vegas-regle.pdf");
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
@@ -109,7 +109,7 @@ function option_choosen() {
     
         document.getElementById("PDF_div").classList.remove("d-none");
         //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-the-moon-regle.pdf";
-        replace_PDF("/PDF/welcome-to-the-moon-regle.pdf");
+        //replace_PDF("/PDF/welcome-to-the-moon-regle.pdf");
     }
     else if (UsageSelect == "custom") {
         document.getElementById("setup").classList.remove("d-none");
@@ -121,10 +121,16 @@ function option_choosen() {
 
 function replace_PDF(PDF_path) {
     let source=PDF_path;
-    let PDF_embed=document.getElementById("PDF");
-    let clone=PDF_embed.cloneNode(true);
-    clone.setAttribute('src',source);
-    PDF_embed.parentNode.replaceChild(clone,PDF_embed);
+    //let PDF_embed=document.getElementById("PDF");
+    //let clone=PDF_embed.cloneNode(true);
+    //clone.setAttribute('src',source);
+    //PDF_embed.parentNode.replaceChild(clone,PDF_embed);
+    document.getElementById("download_PDF").setAttribute('href',source);
+    //document.getElementById("PDF_object").setAttribute('data',source);
+    
+    let new_url = "https://pdfobject.com/pdf/sample-3pp.pdf#page=1";
+    let PDF_object = document.getElementById("PDF_object");
+    PDF_object.setAttribute('data', new_url);
 }
 
 function custom_setup() {
