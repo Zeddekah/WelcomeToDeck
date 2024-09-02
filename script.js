@@ -37,13 +37,20 @@ function option_choosen() {
     document.getElementById("setup").classList.add("d-none");
     document.getElementById("tirage").classList.add("d-none");
     document.getElementById("card-text").innerHTML = "";
+    Deck2 = [];
+    
+    document.getElementById("PDF_div").classList.add("d-none");
+    document.getElementById("PDF_home").classList.add("d-none");
+    document.getElementById("PDF_vegas").classList.add("d-none");
+    document.getElementById("PDF_moon").classList.add("d-none");
 
 
     let UsageSelect = document.getElementById("usage_select").value;
     
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("d-none");
-        document.getElementById("tirage").classList.add("d-none");
+        document.getElementById("PDF_div").classList.remove("d-none");
+        document.getElementById("PDF_home").classList.remove("d-none");
         
         CardList1 = numbers_home;
         CardList2 = face_home;
@@ -66,12 +73,10 @@ function option_choosen() {
         }
         
         document.getElementById("PDF_div").classList.remove("d-none");
-        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-your-perfect-home-regle.pdf";
-        //replace_PDF("/PDF/welcome-to-your-perfect-home-regle.pdf");
+        document.getElementById("PDF_home").classList.remove("d-none");
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
-        document.getElementById("tirage").classList.add("d-none");
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
@@ -94,12 +99,10 @@ function option_choosen() {
         }
         
         document.getElementById("PDF_div").classList.remove("d-none");
-        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-new-las-vegas-regle.pdf";
-        //replace_PDF("/PDF/welcome-to-new-las-vegas-regle.pdf");
+        document.getElementById("PDF_vegas").classList.remove("d-none");
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
-        document.getElementById("tirage").classList.add("d-none");
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
@@ -108,29 +111,11 @@ function option_choosen() {
         refillCards(2);
     
         document.getElementById("PDF_div").classList.remove("d-none");
-        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-the-moon-regle.pdf";
-        //replace_PDF("/PDF/welcome-to-the-moon-regle.pdf");
+        document.getElementById("PDF_moon").classList.remove("d-none");
     }
     else if (UsageSelect == "custom") {
         document.getElementById("setup").classList.remove("d-none");
-        document.getElementById("tirage").classList.add("d-none");
-        document.getElementById("PDF_div").classList.add("d-none");
-        document.getElementById("PDF").contentWindow.document.location.href="";
     }
-}
-
-function replace_PDF(PDF_path) {
-    let source=PDF_path;
-    //let PDF_embed=document.getElementById("PDF");
-    //let clone=PDF_embed.cloneNode(true);
-    //clone.setAttribute('src',source);
-    //PDF_embed.parentNode.replaceChild(clone,PDF_embed);
-    document.getElementById("download_PDF").setAttribute('href',source);
-    //document.getElementById("PDF_object").setAttribute('data',source);
-    
-    let new_url = "https://pdfobject.com/pdf/sample-3pp.pdf#page=1";
-    let PDF_object = document.getElementById("PDF_object");
-    PDF_object.setAttribute('data', new_url);
 }
 
 function custom_setup() {
