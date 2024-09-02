@@ -44,8 +44,6 @@ function option_choosen() {
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("d-none");
         document.getElementById("tirage").classList.add("d-none");
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-your-perfect-home-regle.pdf";
         
         CardList1 = numbers_home;
         CardList2 = face_home;
@@ -55,23 +53,25 @@ function option_choosen() {
         
         if (OSName == "iOS") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
         }
         else if (OSName == "Android") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome") + "<hr />";
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome") + "<hr />";
         }
         else {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img>".link("https://apps.apple.com/app/id1358077007");
-            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img>".link("https://apps.apple.com/app/id1358077007");
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
         }
+        
+        document.getElementById("PDF_div").classList.remove("d-none");
+        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-your-perfect-home-regle.pdf";
+        replace_PDF("/PDF/welcome-to-your-perfect-home-regle.pdf");
     }
     else if (UsageSelect == "welcome_vegas") {
         document.getElementById("deck").classList.remove("d-none");
         document.getElementById("tirage").classList.add("d-none");
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-new-las-vegas-regle.pdf";
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
@@ -81,29 +81,35 @@ function option_choosen() {
         
         if (OSName == "iOS") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1507403095") + "<hr />";
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1507403095") + "<hr />";
         }
         else if (OSName == "Android") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas") + "<hr />";
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas") + "<hr />";
         }
         else {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img>".link("https://apps.apple.com/app/id1507403095");
-            document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img>".link("https://apps.apple.com/app/id1507403095");
+            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
         }
+        
+        document.getElementById("PDF_div").classList.remove("d-none");
+        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-new-las-vegas-regle.pdf";
+        replace_PDF("/PDF/welcome-to-new-las-vegas-regle.pdf");
     }
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("d-none");
         document.getElementById("tirage").classList.add("d-none");
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF").contentWindow.document.location.href="/welcome-to-the-moon-regle.pdf";
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
         
         refillCards(1);
         refillCards(2);
+    
+        document.getElementById("PDF_div").classList.remove("d-none");
+        //document.getElementById("PDF").contentWindow.document.location.href="/PDF/welcome-to-the-moon-regle.pdf";
+        replace_PDF("/PDF/welcome-to-the-moon-regle.pdf");
     }
     else if (UsageSelect == "custom") {
         document.getElementById("setup").classList.remove("d-none");
@@ -111,6 +117,14 @@ function option_choosen() {
         document.getElementById("PDF_div").classList.add("d-none");
         document.getElementById("PDF").contentWindow.document.location.href="";
     }
+}
+
+function replace_PDF(PDF_path) {
+    let source=PDF_path;
+    let PDF_embed=document.getElementById("PDF");
+    let clone=PDF_embed.cloneNode(true);
+    clone.setAttribute('src',source);
+    PDF_embed.parentNode.replaceChild(clone,PDF_embed);
 }
 
 function custom_setup() {
