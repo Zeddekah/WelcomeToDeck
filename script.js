@@ -37,7 +37,7 @@ function option_choosen() {
     document.getElementById("setup").classList.add("d-none");
     document.getElementById("tirage").classList.add("d-none");
     document.getElementById("card-text").innerHTML = "";
-    Deck2 = [];
+    card2 = [];
     
     document.getElementById("PDF_div").classList.add("d-none");
     document.getElementById("PDF_home").classList.add("d-none");
