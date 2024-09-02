@@ -55,7 +55,7 @@ function option_choosen() {
         
         if (OSName == "iOS") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
+            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
         }
         else if (OSName == "Android") {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
@@ -63,7 +63,7 @@ function option_choosen() {
         }
         else {
             document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/App_store.svg></img>".link("https://apps.apple.com/app/id1358077007");
+            document.getElementById("app_link").innerHTML += "<img src=/App_Store.svg></img>".link("https://apps.apple.com/app/id1358077007");
             document.getElementById("app_link").innerHTML += "<img src=/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
         }
     }
