@@ -32,6 +32,14 @@ function myFunction(x) {
   popup.classList.toggle("show");
 }
 
+document.addEventListener("adobe_dc_view_sdk.ready", function(){
+    var adobeDCView = new AdobeDC.View({clientId: "8982beb1316e45708c86a92422c253fb", divId: "adobe-dc-view"});
+    adobeDCView.previewFile({
+        content:{location: {url: ""}},
+        metaData:{fileName: ""}
+    }, {embedMode: "SIZED_CONTAINER"});
+}); 
+
 // SETUP
 
 function option_choosen() {
@@ -39,6 +47,9 @@ function option_choosen() {
     document.getElementById("deck").classList.add("hide");
     document.getElementById("setup").classList.add("hide");
     document.getElementById("tirage").classList.add("hide");
+    document.getElementById("select_before_rulesbook").classList.remove("hide");
+    document.getElementById("select_before_scoreboard").classList.remove("hide");
+    
     document.getElementById("tirage").innerHTML = "";
     card2 = [];
     
@@ -56,12 +67,6 @@ function option_choosen() {
     SVG2[i].setAttribute("xlink:href", "");
     }
     
-    document.getElementById("select_before_rulesbook").classList.remove("hide");
-    document.getElementById("select_before_scoreboard").classList.remove("hide");
-    document.getElementById("PDF_div").classList.add("hide");
-    document.getElementById("PDF_home").classList.add("hide");
-    document.getElementById("PDF_vegas").classList.add("hide");
-    document.getElementById("PDF_moon").classList.add("hide");
 
     let UsageSelect = document.getElementById("usage_select").value;
     
@@ -69,14 +74,18 @@ function option_choosen() {
         document.getElementById("deck").classList.remove("hide");
         document.getElementById("select_before_rulesbook").classList.add("hide");
         document.getElementById("select_before_scoreboard").classList.add("hide");
-        document.getElementById("PDF_div").classList.remove("hide");
-        document.getElementById("PDF_home").classList.remove("hide");
         
         CardList1 = numbers_home;
         CardList2 = face_home;
         
         refillCards(1);
         refillCards(2);
+        
+        adobeDCView = new AdobeDC.View({clientId: "8982beb1316e45708c86a92422c253fb", divId: "adobe-dc-view"});
+            adobeDCView.previewFile({
+                content:{location: {url: "/PDF/welcome-to-your-perfect-home-regle.pdf"}},
+                metaData:{fileName: "welcome-to-your-perfect-home-regle.pdf"}
+            }, {embedMode: "SIZED_CONTAINER"});
         
         if (OSName == "iOS") {
             document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1358077007");
@@ -93,14 +102,18 @@ function option_choosen() {
         document.getElementById("deck").classList.remove("hide");
         document.getElementById("select_before_rulesbook").classList.add("hide");
         document.getElementById("select_before_scoreboard").classList.add("hide");
-        document.getElementById("PDF_div").classList.remove("hide");
-        document.getElementById("PDF_vegas").classList.remove("hide");
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
         
         refillCards(1);
         refillCards(2);
+        
+        adobeDCView = new AdobeDC.View({clientId: "8982beb1316e45708c86a92422c253fb", divId: "adobe-dc-view"});
+            adobeDCView.previewFile({
+                content:{location: {url: "/PDF/welcome-to-new-las-vegas-regle.pdf"}},
+                metaData:{fileName: "welcome-to-new-las-vegas-regle.pdf"}
+            }, {embedMode: "SIZED_CONTAINER"});
         
         if (OSName == "iOS") {
             document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1507403095");
@@ -116,12 +129,15 @@ function option_choosen() {
     else if (UsageSelect == "welcome_moon") {
         document.getElementById("deck").classList.remove("hide");
         document.getElementById("select_before_rulesbook").classList.add("hide");
-        document.getElementById("select_before_scoreboard").classList.remove("hide");
-        document.getElementById("PDF_div").classList.remove("hide");
-        document.getElementById("PDF_moon").classList.remove("hide");
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
+        
+        adobeDCView = new AdobeDC.View({clientId: "8982beb1316e45708c86a92422c253fb", divId: "adobe-dc-view"});
+            adobeDCView.previewFile({
+                content:{location: {url: "/PDF/welcome-to-the-moon-regle.pdf"}},
+                metaData:{fileName: "welcome-to-the-moon-regle.pdf"}
+            }, {embedMode: "SIZED_CONTAINER"});
         
         refillCards(1);
         refillCards(2);
