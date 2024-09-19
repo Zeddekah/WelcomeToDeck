@@ -60,15 +60,14 @@ function option_choosen() {
 
     console.log("num_SVG.length = " + num_SVG.length);
     
-    for (let i = 0; i < 3;i++) {
+    let UsageSelect = document.getElementById("usage_select").value;
+    
+    for (let i=0; i<3; i++) {
     num_SVG[i].textContent = "X";
     num_SVG2[i].textContent = "X";
-    SVG[i].setAttribute("xlink:href", "");
-    SVG2[i].setAttribute("xlink:href", "");
+    SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + ".svg");
+    SVG2[i].setAttribute("xlink:href", "SVG/" + UsageSelect + ".svg");
     }
-    
-
-    let UsageSelect = document.getElementById("usage_select").value;
     
     if (UsageSelect == "welcome_home") {
         document.getElementById("deck").classList.remove("hide");
