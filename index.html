@@ -1,21 +1,15 @@
 <!doctype html>
- <html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
-    <head>
-
+ <html lang="fr" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+     
+     <head>
         <meta charset="UTF-8" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Welcome To Deck</title>
 
-        <link rel="stylesheet" href="styles.css" />
+        <link href="styles.css" rel="stylesheet" type="text/css" />
         <script src="script.js"></script>
-
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous" />
 
         <link rel="stylesheet" href="style.min.css" />
 
@@ -24,99 +18,162 @@
             integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
             crossorigin="anonymous">
         </script>
-    </head>
-
+     </head>
+     
+     
     <body>
-
-        <div class="container">
-
-            <div class="text-center">
-
-                <div class="display-4 page-title">Welcome To Deck</div>
-
-                <p class="lead">For playing to "Welcome To" without the cards ... and more !<br/>(inspired by https://github.com/pwlinkas/virtudeck)</p>
-
-                <form id="choose_option" onsubmit="option_choosen();">
-                    <select name="usage" id="usage_select">
-                      <option value="">--Please choose an option--</option>
-                      <option value="welcome_home">Welcome to your perfect home</option>
-                      <option value="welcome_vegas">Welcome to Vegas</option>
-                      <option value="welcome_moon">Welcome to the Moon</option>
-                      <option value="">------</option>
-                      <option value="custom">Custom (WIP)</option>
-                    </select>
-                    <button type="button" onclick="option_choosen();">Go!</button>
-                </form>
-                
-            </div>
-
-            <div class="game-setup">
-                                
-                <form id="setup" onsubmit="manual_setup();" class="d-none">
-                    
-                    <hr />
-
-                    <div class="form-group">
-                        <label for="setup-card-content1">Card content 1</label>
-                        <textarea class="form-control" id="setup-card-content1" rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="setup-card-content2">Card content 2</label>
-                        <textarea class="form-control" id="setup-card-content2" rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <small class="form-text text-muted">One card per line. Supports basic HTML.</small>
-                        <button type="button" class="btn btn-lg btn-success" onclick="manual_setup();">Go!</button>
-                    </div>
-
-                </form>
-
-            </div>
-
-            <div id="deck" class="deck d-none">
-                
-                <hr />
-                
-                <div class="text-center">
-                    <p>
-                        <button class="btn btn-lg btn-success text-center" onclick="drawCard();">Draw a card</button>
-                    </p>
-                </div>
-                
-                <hr />
-
-                <div id="tirage" class="active-card d-none">
-                    <p id="card-text" class="active-card-text"></p>
-
-                    <hr />
-                </div>
-                
-                <div id="app_link" class="text-center"></div>
-                
-                <div id="PDF_div" class="d-none text-center">
-                    <hr />
-                    <h4>Livret de règles</h4>
-                    <!-- <iframe title="PDF" id="PDF" width="100%" height="500px"> </iframe> -->
-                        <object id="PDF_home"  title="Object after Download" data="/PDF/welcome-to-your-perfect-home-regle.pdf" type="application/pdf" width="100%" height="500px" class="d-none">
-                            <p>Oops! Your browser doesn't support this PDF viewer!</p>
-                            <p><a href="/PDF/welcome-to-your-perfect-home-regle.pdf">Download Instead</a></p>
-                        </object>
-                    <object id="PDF_vegas"  title="Object after Download" data="/PDF/welcome-to-new-las-vegas-regle.pdf" type="application/pdf" width="100%" height="500px" class="d-none">
-                            <p>Oops! Your browser doesn't support this PDF viewer!</p>
-                            <p><a href="/PDF/welcome-to-new-las-vegas-regle.pdf">Download Instead</a></p>
-                        </object>
-                    <object id="PDF_moon"  title="Object after Download" data="/PDF/welcome-to-the-moon-regle.pdf" type="application/pdf" width="100%" height="500px" class="d-none">
-                            <p>Oops! Your browser doesn't support this PDF viewer!</p>
-                            <p><a href="/PDF/welcome-to-the-moon-regle.pdf">Download Instead</a></p>
-                        </object>
-                </div>
-
-            </div>
-
-
+        <div class="text-center">
+            <h1 class="titre">Welcome To Deck</h1>
+            <p class="description">For playing to "Welcome To" without the cards ... and more !</p>
+            
+            <form id="choose_option" onsubmit="option_choosen();">
+                <select name="usage" id="usage_select">
+                  <option value="">--Please choose an option--</option>
+                  <option value="welcome_home">Welcome to your perfect home</option>
+                  <option value="welcome_vegas">Welcome to Vegas</option>
+                  <option value="welcome_moon">Welcome to the Moon</option>
+                  <option value="">------</option>
+                  <option value="custom">Custom (WIP)</option>
+                </select>
+                <button type="button" onclick="option_choosen();">Go!</button>
+            </form>
         </div>
+
+        <div class="hide">
+            <form id="setup" onsubmit="manual_setup();">
+                <hr />
+                    <label for="setup-card-content1">Card content 1</label>
+                    <textarea class="form-control" id="setup-card-content1" rows="5"></textarea>
+                    <label for="setup-card-content2">Card content 2</label>
+                    <textarea class="form-control" id="setup-card-content2" rows="5"></textarea>
+                    <small class="form-text text-muted">One card per line. Supports basic HTML.</small>
+                    <button type="button" class="btn btn-lg btn-success" onclick="manual_setup();">Go!</button>
+            </form>
+        </div>
+
+        <div id="deck" class="hide">
+            <hr />
+            
+            <p class="text-center">
+                <button onclick="drawCard();">Draw a card</button>
+            </p>
+            
+            <div id="SVG" class="text-center">
+                <hr /><h4>Tirage :</h4><br/>
+            
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG" xlink:href="" x=0 y=0></image>
+                    <text class="num_SVG" x=36 y=50>X</text>
+                    <text class="num_SVG2" x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG" xlink:href="" x=0 y=0></image>
+                    <text class="num_SVG" x=36 y=50>X</text>
+                    <text class="num_SVG2" x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG" xlink:href="" x=0 y=0></image>
+                    <text class="num_SVG" x=36 y=50>X</text>
+                    <text class="num_SVG2" x=124 y=230>X</text>
+                </svg>
+                
+                <br/><hr /><h4>Prochaines cartes :</h4><br/>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+            </div>
+
+            <p id="tirage" class="hide"></p>
+            
+        </div>
+        
+        <footer>
+            <table class="bottom">
+                <tbody>
+                    <tr>
+                        <td class="box">
+                            <a href="#rulesbook">Livret de règles</a>
+                        </td>
+                        <td class="box">
+                            <a href="#scoreboard">Feuille de score (App Mobile)</a>
+                        </td>
+                        <td class="box">
+                            <a href="#credits">Credits</a>
+                        </td>
+                </tbody>
+            </table>
+        </footer>
+        
+        <div id="rulesbook" class="modal">
+            <div class="content">
+                <h1>Livret de règles</h1>
+                <p id="select_before_rulesbook">Close this popup then select a game before</p>
+                <div id="PDF_div" class="hide text-center">
+                    <!-- <iframe title="PDF" id="PDF" width="100%" height="500px"> </iframe> -->
+                    <object id="PDF_home"  title="Object after Download" data="/PDF/welcome-to-your-perfect-home-regle.pdf" type="application/pdf" width="100%" height="500px" class="hide">
+                        <p>Oops! Your browser doesn't support this PDF viewer!</p>
+                        <p><a href="/PDF/welcome-to-your-perfect-home-regle.pdf">Download Instead</a></p>
+                    </object>
+                    <object id="PDF_vegas"  title="Object after Download" data="/PDF/welcome-to-new-las-vegas-regle.pdf" type="application/pdf" width="100%" height="500px" class="hide">
+                        <p>Oops! Your browser doesn't support this PDF viewer!</p>
+                        <p><a href="/PDF/welcome-to-new-las-vegas-regle.pdf">Download Instead</a></p>
+                    </object>
+                    <object id="PDF_moon"  title="Object after Download" data="/PDF/welcome-to-the-moon-regle.pdf" type="application/pdf" width="100%" height="500px" class="hide">
+                        <p>Oops! Your browser doesn't support this PDF viewer!</p>
+                        <p><a href="/PDF/welcome-to-the-moon-regle.pdf">Download Instead</a></p>
+                    </object>
+                </div>
+                <a href="#" class="close" >&times;</a>
+            </div>
+        </div>
+        
+        <div id="scoreboard" class="modal">
+            <div class="content">
+                <h1>Feuille de score (App Mobile)</h1>
+                <p id="select_before_scoreboard">Close this popup then select a game before</p>
+                <p id="app_link" class="text-center"></p>
+                <a href="#" class="close">&times;</a>
+            </div>
+        </div>
+        
+        <div id="credits" class="modal">
+            <div class="content">
+                <h1>Credits</h1>
+                <ul>
+                    <li>
+                        Code inspired by <a href=https://github.com/pwlinkas/virtudeck>Vitudeck by pwlinkas</a>
+                    </li>
+                    <li>
+                        Card design based on <a href="https://fr.freepik.com/vecteurs-libre/illustration-du-motif-cartes-jouer_94924448.htm">Freepik Design</a>
+                    </li>
+                </ul>
+                <a href="#" class="close">&times;</a>
+            </div>
+        </div>
+        
     </body>
 
       

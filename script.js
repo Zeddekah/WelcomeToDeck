@@ -1,18 +1,17 @@
-let numButtonClicks = 0;
-function buttonClicked() {
-    numButtonClicks = numButtonClicks + 1;
-    document.getElementById("mainDiv").textContent = "Button Clicked times: " + numButtonClicks;
-}
+// VAR
 
-// SETUP
-
-var numbers_home = ['01', '01', '01', '02', '02', '02', '14', '14', '14', '15', '15', '15', '03', '03', '03', '03', '13', '13', '13', '13', '04', '04', '04', '04', '04', '12', '12', '12', '12', '12', '05', '05', '05', '05', '05', '05', '11', '11', '11', '11', '11', '11', '06', '06', '06', '06', '06', '06', '06', '10', '10', '10', '10', '10', '10', '10', '07', '07', '07', '07', '07', '07', '07', '07', '09', '09', '09', '09', '09', '09', '09', '09', '08', '08', '08', '08', '08', '08', '08', '08', '08'];
-var face_home = ['Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Piscine', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'Agence intérim', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'N° Bis', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Paysagiste', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Géomètre', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier', 'Agent immobilier'];
-var numbers_vegas = ['1','2','14','15','1','2','14','15','1','2','14','15','1','2','14','15','3','13','3','13','3','13','3','13','4','12','4','12','4','12','4','12','4','12','5','11','5','11','5','11','5','11','5','11','5','11','6','10','6','10','6','10','6','10','6','10','6','10','6','10','7','9','7','9','7','9','7','9','7','9','7','9','7','9','7','9','8','8','8','8','8','8','8','8','8'];
-var face_vegas = ['Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Inauguration','Construction','Limousine','Spectacle','Amélioration','Amélioration'];
-var numbers_moon = ['1','2','14','15','1','2','14','15','3','13','3','13','3','13','4','12','4','12','4','12','4','12','5','11','5','11','5','11','5','11','5','11','6','10','6','10','6','10','6','10','6','10','6','10','7','9','7','9','7','9','7','9','7','9','7','9','8','8','8','8','8','8','8'];
-var face_moon = ['Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Eau','Astronaute','Planning','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante','Robot','Energie','Plante'];
+const numbers_home = ["1","1","1","2","2","2","14","14","14","15","15","15","3","3","3","3","13","13","13","13","4","4","4","4","4","12","12","12","12","12","5","5","5","5","5","5","11","11","11","11","11","11","6","6","6","6","6","6","6","10","10","10","10","10","10","10","7","7","7","7","7","7","7","7","9","9","9","9","9","9","9","9","8","8","8","8","8","8","8","8","8"];
+const face_home = ["Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere"];
+const numbers_vegas = ["1","2","14","15","1","2","14","15","1","2","14","15","1","2","14","15","3","13","3","13","3","13","3","13","4","12","4","12","4","12","4","12","4","12","5","11","5","11","5","11","5","11","5","11","5","11","6","10","6","10","6","10","6","10","6","10","6","10","6","10","7","9","7","9","7","9","7","9","7","9","7","9","7","9","7","9","8","8","8","8","8","8","8","8","8"];
+const face_vegas = ["Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Amélioration"];
+const numbers_moon = ["1","2","14","15","1","2","14","15","3","13","3","13","3","13","4","12","4","12","4","12","4","12","5","11","5","11","5","11","5","11","5","11","6","10","6","10","6","10","6","10","6","10","6","10","7","9","7","9","7","9","7","9","7","9","7","9","8","8","8","8","8","8","8"];
+const face_moon = ["Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante"];
 var card2 = [];
+
+var num_SVG = [];
+var num_SVG2 = [];
+var SVG = [];
+var SVG2 = [];
 
 var Deck1 = [];
 var CardList1 = [];
@@ -25,32 +24,53 @@ if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
 if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
 if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
 if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
-console.log('Your OS: ' + OSName);
+console.log("Your OS: " + OSName);
 
-
-function setupToggleHide() {
-    document.getElementById("setup").classList.toggle("d-none");
+function myFunction(x) {
+    window.open('https://javascript.info/');
+  let popup = document.getElementById("popup" + x);
+  popup.classList.toggle("show");
 }
 
+// SETUP
+
 function option_choosen() {
-    document.getElementById("deck").classList.add("d-none");
-    document.getElementById("setup").classList.add("d-none");
-    document.getElementById("tirage").classList.add("d-none");
-    document.getElementById("card-text").innerHTML = "";
+    
+    document.getElementById("deck").classList.add("hide");
+    document.getElementById("setup").classList.add("hide");
+    document.getElementById("tirage").classList.add("hide");
+    document.getElementById("tirage").innerHTML = "";
     card2 = [];
     
-    document.getElementById("PDF_div").classList.add("d-none");
-    document.getElementById("PDF_home").classList.add("d-none");
-    document.getElementById("PDF_vegas").classList.add("d-none");
-    document.getElementById("PDF_moon").classList.add("d-none");
+    num_SVG = document.getElementsByClassName("num_SVG");
+    num_SVG2 = document.getElementsByClassName("num_SVG2");
+    SVG = document.getElementsByClassName("SVG");
+    SVG2 = document.getElementsByClassName("SVG2");
 
+    console.log("num_SVG.length = " + num_SVG.length);
+    
+    for (let i = 0; i < 3;i++) {
+    num_SVG[i].textContent = "X";
+    num_SVG2[i].textContent = "X";
+    SVG[i].setAttribute("xlink:href", "");
+    SVG2[i].setAttribute("xlink:href", "");
+    }
+    
+    document.getElementById("select_before_rulesbook").classList.remove("hide");
+    document.getElementById("select_before_scoreboard").classList.remove("hide");
+    document.getElementById("PDF_div").classList.add("hide");
+    document.getElementById("PDF_home").classList.add("hide");
+    document.getElementById("PDF_vegas").classList.add("hide");
+    document.getElementById("PDF_moon").classList.add("hide");
 
     let UsageSelect = document.getElementById("usage_select").value;
     
     if (UsageSelect == "welcome_home") {
-        document.getElementById("deck").classList.remove("d-none");
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF_home").classList.remove("d-none");
+        document.getElementById("deck").classList.remove("hide");
+        document.getElementById("select_before_rulesbook").classList.add("hide");
+        document.getElementById("select_before_scoreboard").classList.add("hide");
+        document.getElementById("PDF_div").classList.remove("hide");
+        document.getElementById("PDF_home").classList.remove("hide");
         
         CardList1 = numbers_home;
         CardList2 = face_home;
@@ -59,24 +79,22 @@ function option_choosen() {
         refillCards(2);
         
         if (OSName == "iOS") {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1358077007") + "<hr />";
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1358077007");
         }
         else if (OSName == "Android") {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome") + "<hr />";
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
         }
         else {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img>".link("https://apps.apple.com/app/id1358077007");
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1358077007");
+            document.getElementById("app_link").innerHTML += "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
         }
-        
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF_home").classList.remove("d-none");
     }
     else if (UsageSelect == "welcome_vegas") {
-        document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("deck").classList.remove("hide");
+        document.getElementById("select_before_rulesbook").classList.add("hide");
+        document.getElementById("select_before_scoreboard").classList.add("hide");
+        document.getElementById("PDF_div").classList.remove("hide");
+        document.getElementById("PDF_vegas").classList.remove("hide");
         
         CardList1 = numbers_vegas;
         CardList2 = face_vegas;
@@ -85,24 +103,22 @@ function option_choosen() {
         refillCards(2);
         
         if (OSName == "iOS") {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img></p>".link("https://apps.apple.com/app/id1507403095") + "<hr />";
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1507403095");
         }
         else if (OSName == "Android") {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas") + "<hr />";
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
         }
         else {
-            document.getElementById("app_link").innerHTML = "<p><h4>Scoreboard App</h4>" + "<br/>";
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/App_Store.svg></img>".link("https://apps.apple.com/app/id1507403095");
-            document.getElementById("app_link").innerHTML += "<img src=/SVG/Google_Play.svg></img></p>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
+            document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1507403095");
+            document.getElementById("app_link").innerHTML += "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
         }
-        
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF_vegas").classList.remove("d-none");
     }
     else if (UsageSelect == "welcome_moon") {
-        document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("deck").classList.remove("hide");
+        document.getElementById("select_before_rulesbook").classList.add("hide");
+        document.getElementById("select_before_scoreboard").classList.remove("hide");
+        document.getElementById("PDF_div").classList.remove("hide");
+        document.getElementById("PDF_moon").classList.remove("hide");
         
         CardList1 = numbers_moon;
         CardList2 = face_moon;
@@ -110,11 +126,9 @@ function option_choosen() {
         refillCards(1);
         refillCards(2);
     
-        document.getElementById("PDF_div").classList.remove("d-none");
-        document.getElementById("PDF_moon").classList.remove("d-none");
     }
     else if (UsageSelect == "custom") {
-        document.getElementById("setup").classList.remove("d-none");
+        document.getElementById("setup").classList.remove("hide");
     }
 }
 
@@ -146,12 +160,73 @@ function custom_setup() {
         console.log(CardList1);
         console.log(CardList2);
 
-        document.getElementById("setup").classList.add("d-none");
-        document.getElementById("deck").classList.remove("d-none");
+        document.getElementById("setup").classList.add("hide");
+        document.getElementById("deck").classList.remove("hide");
         
         refillCards(1);
         refillCards(2);
     }
+}
+
+// DRAFT BOTH
+
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function drawCard() {
+    document.getElementById("tirage").classList.remove("hide");
+    
+    if (document.getElementById("usage_select").value == "custom") {
+        custom_draw();
+    }
+    
+    else {
+        welcome_draw();
+    }
+}
+
+// DRAFT WELCOME TO
+
+function welcome_draw() {    
+    
+    if (Deck1.length < 3) {
+        refillCards(1);
+    }
+    
+    if (Deck2.length < 6) {
+        refillCards(2);
+    }
+    
+    let card1 = [];
+    let tirage = "<hr /><h4>Tirage :</h4><br/>";
+    
+    for (let i = 0; i < 3; i++) {
+        card1.push(Deck1.pop());
+        card2.push(Deck2.pop());
+        card2.push(Deck2.pop());
+        
+        num_SVG[i].textContent = card1[0];
+        num_SVG2[i].textContent = card1[0];
+        SVG[i].setAttribute("xlink:href", "SVG/Perfect_home/Actions_" + card2[0] + ".svg");
+        
+        tirage = tirage + card1.shift() + " - " + card2.shift() + "<br/>";
+    }
+    
+    tirage = tirage + "<br/><hr /><h4>Prochaines cartes :</h4><br/>";
+
+    for (let i2 = 0; i2 < 3; i2++) {
+        SVG2[i2].setAttribute("xlink:href", "SVG/Perfect_home/Actions_" + card2[i2] + ".svg");
+        
+        tirage = tirage + "xx - " + card2[i2] + "<br/>";
+    }
+    
+    console.log(tirage);
+    //document.getElementById("tirage").innerHTML = tirage;
 }
 
 function refillCards(Deck) {
@@ -178,59 +253,7 @@ function refillCards(Deck) {
 
 }
 
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
-
-
-// GAME
-
-function drawCard() {
-    document.getElementById("tirage").classList.remove("d-none");
-    
-    if (document.getElementById("usage_select").value == "custom") {
-        custom_draw();
-    }
-    
-    else {
-        welcome_draw();
-    }
-}
-
-function welcome_draw() {
-    if (Deck1.length < 3) {
-        refillCards(1);
-    }
-    
-    if (Deck2.length < 6) {
-        refillCards(2);
-    }
-    
-    let card1 = [];
-    let tirage = "<h4>Tirage :</h4><br/>";
-    
-    for (let i = 0; i < 3; i++) {
-        card1.push(Deck1.pop());
-        card2.push(Deck2.pop());
-        card2.push(Deck2.pop());
-        
-        tirage = tirage + card1.shift() + " - " + card2.shift() + "<br/>";
-    }
-    
-    tirage = tirage + "<br/><hr /><h4>Prochaines cartes :</h4><br/>";
-
-    for (let i2 = 0; i2 < 3; i2++) {
-        tirage = tirage + "xx - " + card2[i2] + "<br/>";
-    }
-    
-    
-    document.getElementById("card-text").innerHTML = tirage;
-    console.log(tirage);
-}
+// DRAFT CUSTOM
 
 function custom_draw() {
     if (Deck1.length < 3) {
@@ -251,9 +274,6 @@ function custom_draw() {
         tirage = tirage + card1 + " - " + card2 + "<br/>";
     }
     
-    document.getElementById("card-text").innerHTML = tirage;
+    document.getElementById("tirage").innerHTML = tirage;
     console.log(tirage);
 }
-
-refillCards(1);
-refillCards(2);
