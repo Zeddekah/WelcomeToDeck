@@ -15,24 +15,14 @@
     font-weight:300
 }
 
-.bottom {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color: #F3F3F3;
-    padding: 5px;
-    table-layout: fixed;
-}
-
 @font-face {
     font-family: Academy Engraved LET;
     src: url(FONT/Academy_Engraved_LET_Fonts.ttf);
 }
 
-object {
-    width: 200px;
+.table_SVG {
+    width: 50%;
+    text-align: center;
 }
 
 svg {
@@ -46,6 +36,21 @@ svg text {
     font-family: Academy Engraved LET;
     font-size: 40px;
     text-anchor: middle;
+}
+
+object {
+    width: 200px;
+}
+
+.bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #F3F3F3;
+    padding: 5px;
+    table-layout: fixed;
 }
 
 .modal {
