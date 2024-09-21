@@ -67,6 +67,11 @@ object {
     flex:1;
 }
 
+#the-canvas {
+  border: 1px solid black;
+  direction: ltr;
+}
+
 .content {
     position: relative;
     background: white;

@@ -2,32 +2,26 @@
  <html lang="fr" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
      
      <head>
-        <meta charset="UTF-8" />
+         <meta charset="UTF-8" />
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Welcome To Deck</title>
+         <title>Welcome To Deck</title>
 
-        <link href="styles.css" rel="stylesheet" type="text/css" />
-        <script src="script.js"></script>
-        <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
-
-        <link rel="stylesheet" href="style.min.css" />
-
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-            integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
-            crossorigin="anonymous">
-        </script>
+         <link href="styles.css" rel="stylesheet" type="text/css" />
+         <script src="script.js"></script>
+         
+         <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+         <script src="PDF_Viewer.js" type="module"></script>
      </head>
      
      
-    <body>
-        <div class="text-center">
+     <body>
+         <div class="text-center">
             <h1 class="titre">Welcome To Deck</h1>
             <p class="description">For playing to "Welcome To" without the cards ... and more !</p>
             
-            <form id="choose_option" onsubmit="option_choosen();">
+            <form id="choose_option">
                 <select name="usage" id="usage_select">
                   <option value="">--Please choose an option--</option>
                   <option value="welcome_home">Welcome to your perfect home</option>
@@ -36,7 +30,7 @@
                   <option value="">------</option>
                   <option value="custom">Custom (WIP)</option>
                 </select>
-                <button type="button" onclick="option_choosen();">Go!</button>
+                <button id="option_list_button" type="button" value="Envoyer" onclick="option_choosen();">Envoyer</button>
             </form>
         </div>
 
@@ -132,8 +126,16 @@
             <div class="espace_flex"></div>
             <div class="content content_pdf">
                 <h1>Livret de règles</h1>
-                <div id="adobe-dc-view" style="display: flex; flex:6;"></div>         
                 <p id="select_before_rulesbook">No rulesbook for this selection</p>
+                
+                <div>
+                    <button id="prev">Previous</button>
+                    <button id="next">Next</button>
+                    &nbsp; &nbsp;
+                    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                </div>
+                <canvas id="the-canvas" style="display: flex; flex:6;"></canvas>    
+  
                 <a href="#" class="close" >&times;</a>
             </div>
             <div class="espace_flex"></div>
