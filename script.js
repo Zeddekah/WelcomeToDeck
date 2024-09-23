@@ -1,11 +1,24 @@
 // VAR
 
-    const numbers_home = ["1","1","1","2","2","2","14","14","14","15","15","15","3","3","3","3","13","13","13","13","4","4","4","4","4","12","12","12","12","12","5","5","5","5","5","5","11","11","11","11","11","11","6","6","6","6","6","6","6","10","10","10","10","10","10","10","7","7","7","7","7","7","7","7","9","9","9","9","9","9","9","9","8","8","8","8","8","8","8","8","8"];
-    const face_home = ["Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Piscine","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","Agence_interim","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","N_bis","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Paysagiste","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Geometre","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere","Agence_immobiliere"];
-    const numbers_vegas = ["1","2","14","15","1","2","14","15","1","2","14","15","1","2","14","15","3","13","3","13","3","13","3","13","4","12","4","12","4","12","4","12","4","12","5","11","5","11","5","11","5","11","5","11","5","11","6","10","6","10","6","10","6","10","6","10","6","10","6","10","7","9","7","9","7","9","7","9","7","9","7","9","7","9","7","9","8","8","8","8","8","8","8","8","8"];
-    const face_vegas = ["Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Inauguration","Construction","Limousine","Spectacle","Amélioration","Amélioration"];
-    const numbers_moon = ["1","2","14","15","1","2","14","15","3","13","3","13","3","13","4","12","4","12","4","12","4","12","5","11","5","11","5","11","5","11","5","11","6","10","6","10","6","10","6","10","6","10","6","10","7","9","7","9","7","9","7","9","7","9","7","9","8","8","8","8","8","8","8"];
-    const face_moon = ["Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Eau","Astronaute","Planning","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante","Robot","Energie","Plante"];
+    const numbers_home = [];
+    const face_home = [];
+    const numbers_vegas = [];
+    const face_vegas = [];
+    const numbers_moon = [];
+    const face_moon = [];
+
+    for (let a2=0; a2<2; a2++) {numbers_moon.push("1","2","14","15");}
+    for (let a3=0; a3<3; a3++) {numbers_home.push("1","2","14","15");numbers_vegas.push("1","2","14","15");numbers_moon.push("3","13");}
+    for (let a4=0; a4<4; a4++) {numbers_home.push("3","13");numbers_vegas.push("3","13");numbers_moon.push("4","12");}
+    for (let a5=0; a5<5; a5++) {numbers_home.push("14","12");numbers_vegas.push("4","12");numbers_moon.push("5","11");}
+    for (let a6=0; a6<6; a6++) {numbers_home.push("5","11");numbers_vegas.push("5","11");numbers_moon.push("6","7","9","10");}
+    for (let a7=0; a7<7; a7++) {numbers_home.push("6","10");numbers_vegas.push("6","10");numbers_moon.push("8");face_moon.push("Eau","Astronaute","Planning");}
+    for (let a8=0; a8<8; a8++) {numbers_home.push("7","9");numbers_vegas.push("7","9");}
+    for (let a9=0; a9<9; a9++) {numbers_home.push("8");face_home.push("Piscine","Agence_interim","N_bis");numbers_vegas.push("8");}
+    for (let a14=0; a14<14; a14++) {face_moon.push("Robot","Energie","Plante");}
+    for (let a16=0; a16<16; a16++) {face_vegas.push("Inauguration","Construction","Limousine","Spectacle");}
+    for (let a17=0; a17<17; a17++) {face_vegas.push("Amelioration");}
+    for (let a18=0; a18<18; a18++) {face_home.push("Paysagiste","Agence_immobiliere","Geometre");}
 
     var card2 = [];
 
@@ -55,8 +68,8 @@
         for (let i=0; i<3; i++) {
         num_SVG[i].textContent = "X";
         num_SVG2[i].textContent = "X";
-        SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + ".svg");
-        SVG2[i].setAttribute("xlink:href", "SVG/" + UsageSelect + ".svg");
+        SVG[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
+        SVG2[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
         }
 
         if (UsageSelect == "welcome_home") {
