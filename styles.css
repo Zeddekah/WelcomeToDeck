@@ -54,6 +54,9 @@ object {
 }
 
 .modal {
+    opacity: 0;  /* Modal masqué au départ */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.7);
@@ -62,14 +65,64 @@ object {
     justify-content: center;
 }
 
+.modal:target {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;  /* Fond blanc */
+    padding: 20px;
+    border-radius: 10px;  /* Bords arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre */
+    animation: modalShow 0.5s ease;  /* Animation d'apparition */
+}
+
+@keyframes modalShow {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 .espace_flex {
     display: flex;
     flex:1;
 }
 
-#the-canvas {
-  border: 1px solid black;
-  direction: ltr;
+#PDF_rules {
+    max-width: 100%;  /* Limiter la largeur de la div à 100% */
+    overflow: hidden;  /* Empêcher tout dépassement du contenu */
+    height: auto;
+}
+
+#pdf-container {
+    overflow-y: scroll;  /* Ajoutez le défilement vertical */
+    height: 100%;
+    max-height: 600px;  /* Limitez la hauteur pour éviter de couper le PDF */
+    width: 100%;  /* Prenez toute la largeur disponible */
+}
+
+canvas {
+    width: 100%;  /* Prenez toute la largeur de la div */
+    height: auto;  /* Conservez le ratio du PDF */
 }
 
 .content {
@@ -77,7 +130,6 @@ object {
     background: white;
     padding: 1em 2em;
     border-radius: 4px;
-    height: 80%;
 }
 
 .content_pdf {
@@ -87,10 +139,6 @@ object {
     height: 80%;
 }
 
-.modal:target {
-    display: flex;
-}
-
 .close {
     position: absolute;
     top: 0;
@@ -98,4 +146,138 @@ object {
     color: #fe0606;
     font-size: 30px;
     text-decoration: none;
+}
+
+svg {
+    width: 100%; /* Prend toute la largeur du conteneur */
+    height: auto; /* Ajuste la hauteur en fonction de la largeur */
+    max-width: 200px; /* Limite la largeur maximale */
+    overflow: visible; /* Gère le débordement */
+    box-shadow: 0 -0 10000px transparent; /* Pour Chrome */
+}
+
+svg text {
+    font-family: Academy Engraved LET;
+    font-size: 2em; /* Utiliser des unités relatives */
+    text-anchor: middle;
+}
+
+button {
+    background-color: #28a745;  /* Couleur principale (bleu) */
+    color: white;  /* Texte en blanc */
+    border: none;  /* Pas de bordure */
+    border-radius: 5px;  /* Bordures arrondies */
+    padding: 10px 20px;  /* Espacement interne */
+    font-size: 16px;  /* Taille de la police */
+    cursor: pointer;  /* Curseur pointeur au survol */
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Transition fluide */
+}
+
+button:hover {
+    background-color: #218838;  /* Changement de couleur au survol */
+    transform: translateY(-2px);  /* Effet d'élévation au survol */
+}
+
+button:active {
+    transform: translateY(0);  /* Réinitialisation de l'élévation lors du clic */
+}
+
+button, .card, .modal-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition sur l'ombre et le mouvement */
+}
+
+button:hover, .card:hover, .modal-content:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Augmente l'ombre au survol */
+    transform: translateY(-3px);  /* Légère élévation au survol */
+}
+
+#option_list_button {
+    background-color: #28a745;  /* Vert */
+    color: white;  /* Texte blanc */
+    padding: 5px 10px;  /* Plus compact avec moins de padding */
+    font-size: 14px;  /* Police légèrement réduite */
+    border: none;  /* Pas de bordure */
+    border-radius: 3px;  /* Coins légèrement arrondis */
+    cursor: pointer;  /* Curseur pointeur */
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* Transition fluide */
+}
+
+#option_list_button:hover {
+    background-color: #218838;  /* Vert foncé au survol */
+    transform: translateY(-1px);  /* Légère élévation au survol */
+}
+
+#option_list_button:active {
+    background-color: #1e7e34;  /* Vert encore plus foncé au clic */
+    transform: translateY(0);  /* Retour à la position initiale au clic */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;  /* Police Roboto */
+    font-size: 16px;
+    line-height: 1.6;  /* Espacement des lignes pour la lisibilité */
+    color: #333;  /* Couleur du texte */
+}
+
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;  /* Gras pour les titres */
+    color: #28a745;  /* Couleur bleu pour les titres */
+}
+
+h1 {
+    font-size: 3rem;  /* Taille plus grande pour les titres principaux */
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+    margin: 20px 0;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);  /* Légère élévation au survol */
+}
+
+a {
+    color: #007bff;  /* Couleur bleue pour les liens */
+    text-decoration: none;  /* Supprimer le soulignement par défaut */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;  /* Couleur foncée au survol */
+    text-decoration: underline;  /* Soulignement au survol */
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #28a745;  /* Couleur de la bordure lors du focus */
+    outline: none;
+}
+
+select {
+    width: 20em; /* Largeur relative à la taille du texte */
+    max-width: 100%; /* Empêcher le dépassement du conteneur */
+    padding: 8px;
+    border-radius: 5px;
 }

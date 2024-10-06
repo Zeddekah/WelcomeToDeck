@@ -9,8 +9,9 @@
          <title>Welcome To Deck</title>
 
          <link href="styles.css" rel="stylesheet" type="text/css" />
-         <script src="script.js"></script>
+         <script src="script.js" defer></script>
          
+        <!-- Charge PDJ Viewer -->
          <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
          <script src="PDF_Viewer.js" type="module"></script>
      </head>
@@ -30,13 +31,13 @@
                   <option value="">------</option>
                   <option value="custom">Custom (WIP)</option>
                 </select>
-                <button id="option_list_button" type="button" value="Envoyer" onclick="option_choosen();">Envoyer</button>
+                <button id="option_list_button" type="button" value="Envoyer">Envoyer</button>
             </form>
         </div>
 
         <div class="hide">
+            <hr />
             <form id="setup" onsubmit="manual_setup();">
-                <hr />
                     <label for="setup-card-content1">Card content 1</label>
                     <textarea class="form-control" id="setup-card-content1" rows="5"></textarea>
                     <label for="setup-card-content2">Card content 2</label>
@@ -47,15 +48,9 @@
         </div>
 
         <div id="deck" class="hide">
-            <hr />
-            
-            <p class="text-center">
-                <button onclick="drawCard();">Draw a card</button>
-            </p>
             
             <div id="SVG" class="text-center">
-                <hr /><h4>Tirage :</h4><br/>
-                
+                <hr /><h4>Tirage :</h4>                
                 <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                     <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
                     <image class="SVG" xlink:href="" x=0 y=0></image>
@@ -76,9 +71,9 @@
                     <text class="num_SVG" x=36 y=50>X</text>
                     <text class="num_SVG2" x=124 y=230>X</text>
                 </svg>
-                
-                <br/><hr /><h4>Prochaines cartes :</h4><br/>
-                
+                <p class="text-center">
+                   <button id="drawButton" onclick="drawCard();">Draw a card</button>
+                </p><h4>Prochaines cartes :</h4>
                 <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                     <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
                     <image class="SVG2" xlink:href="" x=0 y=0></image>
@@ -109,39 +104,33 @@
             <table class="bottom">
                 <tbody>
                     <tr>
-                        <td>
-                            <a href="#rulesbook">Livret de règles</a>
-                        </td>
-                        <td>
-                            <a href="#scoreboard">Feuille de score (App Mobile)</a>
-                        </td>
-                        <td>
-                            <a href="#credits">Credits</a>
-                        </td>
+                        <td id="rulesbook_link">Livret de règles</td>
+                        <td id="scoreboard_link">Livret de règles</td>
+                        <td id="credits_link">Livret de règles</td>
                 </tbody>
             </table>
-        </footer>
+         </footer>
         
-        <div id="rulesbook" class="modal text-center">
+        <div id="rulesbook" class="modal text-center" onclick="closeModal(event, 'rulesbook')">
             <div class="espace_flex"></div>
             <div class="content content_pdf">
                 <h1>Livret de règles</h1>
                 <p id="select_before_rulesbook">No rulesbook for this selection</p>
                 
-                <div>
-                    <button id="prev">Previous</button>
-                    <button id="next">Next</button>
-                    &nbsp; &nbsp;
-                    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                    
+                <div id="PDF_rules" class="hide">
+                    <a href="">PDF download link</a>
+                    <div id="pdf-container" style="overflow-y: scroll; height: 100%; max-height: 600px;">
+                        <!-- Les pages PDF seront chargées ici -->
+                    </div>
                 </div>
-                <canvas id="the-canvas" style="display: flex; flex:6;"></canvas>    
-  
+                
                 <a href="#" class="close" >&times;</a>
             </div>
             <div class="espace_flex"></div>
         </div>
         
-        <div id="scoreboard" class="modal text-center">
+        <div id="scoreboard" class="modal text-center" onclick="closeModal(event, 'scoreboard')">
             <div class="content">
                 <h1>Feuille de score (App Mobile)</h1>
                 <p id="select_before_scoreboard">No Mobile App for this selection</p>
@@ -150,7 +139,7 @@
             </div>
         </div>
         
-        <div id="credits" class="modal">
+        <div id="credits" class="modal" onclick="closeModal(event, 'credits')">
             <div class="content">
                 <h1>Credits</h1>
                 <ul>

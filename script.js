@@ -1,24 +1,60 @@
-// VAR
+// -------------------------------------------- Card setup --------------------------------------------
+    
+// Tableau des données pour chaque jeu
+const cardData = {
+  home: { numbers: [], faces: [] },
+  vegas: { numbers: [], faces: [] },
+  moon: { numbers: [], faces: [] },
+};
 
-    const numbers_home = [];
-    const face_home = [];
-    const numbers_vegas = [];
-    const face_vegas = [];
-    const numbers_moon = [];
-    const face_moon = [];
+// Remplissage dynamique des tableaux
+for (let i = 0; i < 18; i++) {
+    if (i < 2) cardData.moon.numbers.push("1","2","14","15");
+    if (i < 3) {
+        cardData.home.numbers.push("1","2","14","15");
+        cardData.vegas.numbers.push("1","2","14","15");
+        cardData.moon.numbers.push("3","13");
+    }
+    if (i < 4) {
+        cardData.home.numbers.push("3","13");
+        cardData.vegas.numbers.push("3","13");
+        cardData.moon.numbers.push("4","12");
+    }
+    if (i < 5) {
+        cardData.home.numbers.push("14","12");
+        cardData.vegas.numbers.push("4","12");
+        cardData.moon.numbers.push("5","11");
+    }
+    if (i < 6) {
+        cardData.home.numbers.push("5","11");
+        cardData.vegas.numbers.push("5","11");
+        cardData.moon.numbers.push("6","7","9","10");
+    }
+    if (i < 7) {
+        cardData.home.numbers.push("6","10");
+        cardData.vegas.numbers.push("6","10");
+        cardData.moon.numbers.push("8");
+        cardData.moon.faces.push("Eau","Astronaute","Planning");
+    }
+    if (i < 8) {
+        cardData.home.numbers.push("7","9");
+        cardData.vegas.numbers.push("7","9");
+    }
+    if (i < 9) {
+        cardData.home.numbers.push("8");
+        cardData.home.faces.push("Piscine","Agence_interim","N_bis");
+        cardData.vegas.numbers.push("8");
+    }
+    if (i < 14) cardData.moon.faces.push("Robot","Energie","Plante");
+    if (i < 16) cardData.vegas.faces.push("Inauguration","Construction","Limousine","Spectacle");
+    if (i < 17) cardData.vegas.faces.push("Amelioration");
+    if (i < 18) cardData.home.faces.push("Paysagiste","Agence_immobiliere","Geometre");
+}
 
-    for (let a2=0; a2<2; a2++) {numbers_moon.push("1","2","14","15");}
-    for (let a3=0; a3<3; a3++) {numbers_home.push("1","2","14","15");numbers_vegas.push("1","2","14","15");numbers_moon.push("3","13");}
-    for (let a4=0; a4<4; a4++) {numbers_home.push("3","13");numbers_vegas.push("3","13");numbers_moon.push("4","12");}
-    for (let a5=0; a5<5; a5++) {numbers_home.push("14","12");numbers_vegas.push("4","12");numbers_moon.push("5","11");}
-    for (let a6=0; a6<6; a6++) {numbers_home.push("5","11");numbers_vegas.push("5","11");numbers_moon.push("6","7","9","10");}
-    for (let a7=0; a7<7; a7++) {numbers_home.push("6","10");numbers_vegas.push("6","10");numbers_moon.push("8");face_moon.push("Eau","Astronaute","Planning");}
-    for (let a8=0; a8<8; a8++) {numbers_home.push("7","9");numbers_vegas.push("7","9");}
-    for (let a9=0; a9<9; a9++) {numbers_home.push("8");face_home.push("Piscine","Agence_interim","N_bis");numbers_vegas.push("8");}
-    for (let a14=0; a14<14; a14++) {face_moon.push("Robot","Energie","Plante");}
-    for (let a16=0; a16<16; a16++) {face_vegas.push("Inauguration","Construction","Limousine","Spectacle");}
-    for (let a17=0; a17<17; a17++) {face_vegas.push("Amelioration");}
-    for (let a18=0; a18<18; a18++) {face_home.push("Paysagiste","Agence_immobiliere","Geometre");}
+    
+// -------------------------------------------- VAR --------------------------------------------
+
+    var UsageSelect = "";
 
     var card2 = [];
 
@@ -40,10 +76,8 @@
     if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
     console.log("Your OS: " + OSName);
 
-// ----------------------------------------------------------------------
 
-
-// SETUP
+// -------------------------------------------- SETUP --------------------------------------------
 
     function option_choosen() {
 
@@ -63,7 +97,7 @@
 
         console.log("num_SVG.length = " + num_SVG.length);
 
-        let UsageSelect = document.getElementById("usage_select").value;
+        UsageSelect = document.getElementById("usage_select").value;
 
         for (let i=0; i<3; i++) {
         num_SVG[i].textContent = "X";
@@ -76,9 +110,11 @@
             document.getElementById("deck").classList.remove("hide");
             document.getElementById("select_before_rulesbook").classList.add("hide");
             document.getElementById("select_before_scoreboard").classList.add("hide");
+            
+            loadPDF("PDF/welcome-to-your-perfect-home-regle.pdf");
 
-            CardList1 = numbers_home;
-            CardList2 = face_home;
+            CardList1 = cardData.home.numbers;
+            CardList2 = cardData.home.faces;
 
             refillCards(1);
             refillCards(2);
@@ -98,9 +134,11 @@
             document.getElementById("deck").classList.remove("hide");
             document.getElementById("select_before_rulesbook").classList.add("hide");
             document.getElementById("select_before_scoreboard").classList.add("hide");
+            
+            loadPDF("PDF/welcome-to-new-las-vegas-regle.pdf");
 
-            CardList1 = numbers_vegas;
-            CardList2 = face_vegas;
+            CardList1 = cardData.vegas.numbers;
+            CardList2 = cardData.vegas.faces;
 
             refillCards(1);
             refillCards(2);
@@ -119,9 +157,11 @@
         else if (UsageSelect == "welcome_moon") {
             document.getElementById("deck").classList.remove("hide");
             document.getElementById("select_before_rulesbook").classList.add("hide");
+            
+            loadPDF("PDF/welcome-to-the-moon-regle.pdf");
 
-            CardList1 = numbers_moon;
-            CardList2 = face_moon;
+            CardList1 = cardData.moon.numbers;
+            CardList2 = cardData.moon.faces;
 
             refillCards(1);
             refillCards(2);
@@ -129,6 +169,10 @@
         }
         else if (UsageSelect == "custom") {
             document.getElementById("setup").classList.remove("hide");
+            loadPDF("");
+        }
+        else {
+            loadPDF("");
         }
     }
 
@@ -168,7 +212,7 @@
         }
     }
 
-// DRAFT BOTH
+// -------------------------------------------- DRAFT BOTH --------------------------------------------
 
     function shuffle(a) {
         for (let i = a.length - 1; i > 0; i--) {
@@ -181,7 +225,7 @@
     function drawCard() {
         document.getElementById("tirage").classList.remove("hide");
 
-        if (document.getElementById("usage_select").value == "custom") {
+        if (UsageSelect == "custom") {
             custom_draw();
         }
 
@@ -190,10 +234,8 @@
         }
     }
 
-// ----------------------------------------------------------------------
 
-
-// DRAFT WELCOME TO
+// -------------------------------------------- DRAFT WELCOME TO --------------------------------------------
 
     function welcome_draw() {    
 
@@ -215,7 +257,7 @@
 
             num_SVG[i].textContent = card1[0];
             num_SVG2[i].textContent = card1[0];
-            SVG[i].setAttribute("xlink:href", "SVG/Perfect_home/Actions_" + card2[0] + ".svg");
+            SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[0] + ".svg");
 
             tirage = tirage + card1.shift() + " - " + card2.shift() + "<br/>";
         }
@@ -223,7 +265,7 @@
         tirage = tirage + "<br/><hr /><h4>Prochaines cartes :</h4><br/>";
 
         for (let i2 = 0; i2 < 3; i2++) {
-            SVG2[i2].setAttribute("xlink:href", "SVG/Perfect_home/Actions_" + card2[i2] + ".svg");
+            SVG2[i2].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[i2] + ".svg");
 
             tirage = tirage + "xx - " + card2[i2] + "<br/>";
         }
@@ -256,10 +298,8 @@
 
     }
 
-// ----------------------------------------------------------------------
 
-
-// DRAFT CUSTOM
+// -------------------------------------------- DRAFT CUSTOM --------------------------------------------
 
     function custom_draw() {
         if (Deck1.length < 3) {
@@ -284,4 +324,97 @@
         console.log(tirage);
     }
 
-// ----------------------------------------------------------------------
+
+// -------------------------------------------- Modale closing + onclick listener --------------------------------------------
+
+function closeModal(event, modalId) {
+    const modalContent = document.querySelector(`#${modalId} .content`);
+    if (!modalContent.contains(event.target)) {
+        window.location.href = '#';  // Closes the modal by resetting the hash
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const optionButton = document.getElementById('option_list_button');
+    if (optionButton) {
+        optionButton.addEventListener('click', function() {
+            option_choosen(); // Exécute la fonction lorsqu'on clique sur le bouton
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const rulesbookLink = document.getElementById('rulesbook_link');
+    if (rulesbookLink) {
+        rulesbookLink.addEventListener('click', function() {
+            window.location.href = '#rulesbook';
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const scoreboardLink = document.getElementById('scoreboard_link');
+    if (scoreboardLink) {
+        scoreboardLink.addEventListener('click', function() {
+            window.location.href = '#scoreboard';
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const creditsLink = document.getElementById('credits_link');
+    if (creditsLink) {
+        creditsLink.addEventListener('click', function() {
+            window.location.href = '#credits';
+        });
+    }
+});
+
+
+// -------------------------------------------- PDF on mobile --------------------------------------------
+
+
+var scale = window.innerWidth < 600 ? 0.5 : 1.0;  // 0.5 pour mobile, 1.0 pour les écrans plus larges
+
+window.addEventListener('resize', function() {
+    scale = window.innerWidth < 600 ? 0.5 : 1.0;
+    renderPage(pageNum);  // Redessine la page actuelle avec la nouvelle échelle
+});
+
+
+// -------------------------------------------- PDF scroll + load --------------------------------------------
+
+function renderAllPages() {
+    for (let num = 1; num <= pdfDoc.numPages; num++) {
+        pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport({ scale: 1.5 });
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Ajouter le canevas dans le conteneur
+            document.getElementById('pdf-container').appendChild(canvas);
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            page.render(renderContext);
+        });
+    }
+}
+
+// Initialiser le PDF
+function loadPDF(url) {
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        renderAllPages();  // Afficher toutes les pages dans le conteneur
+
+        
+        // Retirer la classe hide pour afficher la div PDF_rules
+        document.getElementById('PDF_rules').classList.remove('hide');
+    }).catch(function(error) {
+        console.error("Erreur lors du chargement du PDF:", error);
+    });
+}
