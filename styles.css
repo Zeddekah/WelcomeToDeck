@@ -26,19 +26,35 @@
 }
 
 svg {
-    width: 200px;
-    height: 250px;
-    overflow: visible;
-    box-shadow: 0 -0 10000px transparent; /*trick for chrome*/
+    width: 100%; /* Prend toute la largeur du conteneur */
+    height: auto; /* Ajuste la hauteur en fonction de la largeur */
+    max-width: 200px; /* Limite la largeur maximale */
+    overflow: visible; /* Gère le débordement */
+    box-shadow: 0 -0 10000px transparent; /* Pour Chrome */
 }
 
 svg text {
     font-family: Academy Engraved LET;
-    font-size: 40px;
+    font-size: 2em; /* Utiliser des unités relatives */
     text-anchor: middle;
 }
 
-object {
+#tirage-svg-container, #prochaines-cartes-svg-container {
+    display: flex;
+    justify-content: center;  /* Espace égal entre les SVG */
+    flex-wrap: nowrap;  /* Empêche les SVG de passer à une nouvelle ligne */
+    gap: 20px;  /* Espacement entre les SVG */
+    width: 100%;  /* Assurez-vous que le conteneur est fluide */
+}
+
+#tirage-svg-container svg, #prochaines-cartes-svg-container svg {
+    max-width: 200px;
+    min-width: 100px;
+    height: auto;  /* Conserver le ratio d'aspect */
+    flex: 1 1 auto;  /* Permet aux SVG de s'étendre et de se rétrécir */
+}
+
+img {
     width: 200px;
 }
 
@@ -136,7 +152,7 @@ canvas {
     display: flex;
     flex:6;
     flex-direction: column;
-    height: 80%;
+    max-height: 80%;
 }
 
 .close {
@@ -146,20 +162,6 @@ canvas {
     color: #fe0606;
     font-size: 30px;
     text-decoration: none;
-}
-
-svg {
-    width: 100%; /* Prend toute la largeur du conteneur */
-    height: auto; /* Ajuste la hauteur en fonction de la largeur */
-    max-width: 200px; /* Limite la largeur maximale */
-    overflow: visible; /* Gère le débordement */
-    box-shadow: 0 -0 10000px transparent; /* Pour Chrome */
-}
-
-svg text {
-    font-family: Academy Engraved LET;
-    font-size: 2em; /* Utiliser des unités relatives */
-    text-anchor: middle;
 }
 
 button {
@@ -280,4 +282,62 @@ select {
     max-width: 100%; /* Empêcher le dépassement du conteneur */
     padding: 8px;
     border-radius: 5px;
+}
+
+#custom-setup {
+    margin: 20px;
+}
+
+.deck-config {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.deck-config label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#tirageResult {
+    margin-top: 20px;
+}
+
+.deck-result {
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.deck-result h4 {
+    margin-bottom: 10px;
+    color: #007bff;
 }

@@ -54,275 +54,487 @@ for (let i = 0; i < 18; i++) {
     
 // -------------------------------------------- VAR --------------------------------------------
 
-    var UsageSelect = "";
+let UsageSelect = "";
+let card2 = [];
+let num_SVG = [], num_SVG2 = [], SVG = [], SVG2 = [];
+let Deck1 = [], Deck2 = [];
+let CardList1 = [], CardList2 = [];
 
-    var card2 = [];
 
-    var num_SVG = [];
-    var num_SVG2 = [];
-    var SVG = [];
-    var SVG2 = [];
+// -------------------------------------------- Détection OS --------------------------------------------
 
-    var Deck1 = [];
-    var CardList1 = [];
-    var Deck2 = [];
-    var CardList2 = [];
+const userAgent = navigator.userAgent;
+const OSName = /Win/.test(userAgent) ? "Windows" : 
+               /Mac/.test(userAgent) ? "Macintosh" : 
+               /Linux/.test(userAgent) ? "Linux" : 
+               /Android/.test(userAgent) ? "Android" : 
+               /like Mac/.test(userAgent) ? "iOS" : "Unknown OS";
 
-    var OSName = "Unknown OS";
-    if (navigator.userAgent.indexOf("Win") != -1) OSName = "Windows";
-    if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
-    if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
-    if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
-    if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
-    console.log("Your OS: " + OSName);
+console.log("Your OS: " + OSName);
 
 
 // -------------------------------------------- SETUP --------------------------------------------
 
-    function option_choosen() {
+function option_choosen() {
+    // Masquer les éléments inutiles
+    document.getElementById("deck").classList.add("hide");
+    document.getElementById("custom_setup").classList.add("hide");
+    document.getElementById("select_before_rulesbook").classList.remove("hide");
+    document.getElementById('PDF_rules').classList.add('hide');
+    document.getElementById("select_before_scoreboard").classList.remove("hide");
+    loadAppLink("");
+    loadPDF("");
 
-        document.getElementById("deck").classList.add("hide");
-        document.getElementById("setup").classList.add("hide");
-        document.getElementById("tirage").classList.add("hide");
-        document.getElementById("select_before_rulesbook").classList.remove("hide");
-        document.getElementById("select_before_scoreboard").classList.remove("hide");
+    card2 = [];
 
-        document.getElementById("tirage").innerHTML = "";
-        card2 = [];
+    // Récupérer les éléments graphiques
+    num_SVG = document.getElementsByClassName("num_SVG");
+    num_SVG2 = document.getElementsByClassName("num_SVG2");
+    SVG = document.getElementsByClassName("SVG");
+    SVG2 = document.getElementsByClassName("SVG2");
 
-        num_SVG = document.getElementsByClassName("num_SVG");
-        num_SVG2 = document.getElementsByClassName("num_SVG2");
-        SVG = document.getElementsByClassName("SVG");
-        SVG2 = document.getElementsByClassName("SVG2");
+    console.log("num_SVG.length = " + num_SVG.length);
 
-        console.log("num_SVG.length = " + num_SVG.length);
+    // Sélection de l'option
+    UsageSelect = document.getElementById("usage_select").value;
 
-        UsageSelect = document.getElementById("usage_select").value;
 
-        for (let i=0; i<3; i++) {
-        num_SVG[i].textContent = "X";
-        num_SVG2[i].textContent = "X";
-        SVG[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
-        SVG2[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
+
+    // Réinitialiser les SVG
+    for (let i=0; i<3; i++) {
+    num_SVG[i].textContent = "X";
+    num_SVG2[i].textContent = "X";
+    SVG[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
+    SVG2[i].setAttribute("xlink:href", "SVG/Bluecocker.svg");
+    }
+    
+    // Chargement selon l'option sélectionnée
+    const options = {
+        "welcome_home": {
+            PDFrules: "PDF/welcome-to-your-perfect-home-regle.pdf",
+            cards: cardData.home,
+            app: {
+                android: "https://play.google.com/store/apps/details?id=com.bluecocker.welcome",
+                ios: "https://apps.apple.com/app/id1358077007"
+            }
+        },
+        "welcome_vegas": {
+            PDFrules: "PDF/welcome-to-new-las-vegas-regle.pdf",
+            cards: cardData.vegas,
+            app: {
+                android: "https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas",
+                ios: "https://apps.apple.com/app/id1507403095"
+            }
+        },
+        "welcome_moon": {
+            PDFrules: "PDF/welcome-to-the-moon-regle.pdf",
+            cards: cardData.moon
         }
+    };
 
-        if (UsageSelect == "welcome_home") {
-            document.getElementById("deck").classList.remove("hide");
-            document.getElementById("select_before_rulesbook").classList.add("hide");
-            document.getElementById("select_before_scoreboard").classList.add("hide");
-            
-            loadPDF("PDF/welcome-to-your-perfect-home-regle.pdf");
+    const selectedOption = options[UsageSelect];
 
-            CardList1 = cardData.home.numbers;
-            CardList2 = cardData.home.faces;
+    if (selectedOption) {
+        const PDFpath = selectedOption.PDFrules;
+        document.getElementById("deck").classList.remove("hide");
+        document.getElementById("select_before_rulesbook").classList.add("hide");
+        loadPDF(PDFpath);
+        CardList1 = selectedOption.cards.numbers.slice();
+        CardList2 = selectedOption.cards.faces.slice();
+        refillCards(1);
+        refillCards(2);
+        loadAppLink(selectedOption);
+    } else if (UsageSelect === "custom") {
+        document.getElementById("custom_setup").classList.remove("hide");
+    }
+}
 
-            refillCards(1);
-            refillCards(2);
+// Fonction pour charger les liens des stores
+function loadAppLink(selectedOption) {
+    if (selectedOption.app) {
+        const appLinks = {
+            "iOS": '<a href="' + selectedOption.app.ios + '" target="_blank"><img src="SVG/App_Store.svg" alt="App Store"></a>',
+            "Android": '<a href="' + selectedOption.app.android + '" target="_blank"><img src="SVG/Google_Play.svg" alt="Google Play"></a>'
+        };
 
-            if (OSName == "iOS") {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1358077007");
-            }
-            else if (OSName == "Android") {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
-            }
-            else {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1358077007");
-                document.getElementById("app_link").innerHTML += "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcome");
-            }
+        let appLinkHTML;
+
+        // Si l'OS est iOS, afficher uniquement le lien iOS
+        if (OSName === "iOS") {
+            appLinkHTML = appLinks.iOS;
         }
-        else if (UsageSelect == "welcome_vegas") {
-            document.getElementById("deck").classList.remove("hide");
-            document.getElementById("select_before_rulesbook").classList.add("hide");
-            document.getElementById("select_before_scoreboard").classList.add("hide");
-            
-            loadPDF("PDF/welcome-to-new-las-vegas-regle.pdf");
-
-            CardList1 = cardData.vegas.numbers;
-            CardList2 = cardData.vegas.faces;
-
-            refillCards(1);
-            refillCards(2);
-
-            if (OSName == "iOS") {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1507403095");
-            }
-            else if (OSName == "Android") {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
-            }
-            else {
-                document.getElementById("app_link").innerHTML = "<object type=image/svg+xml data=SVG/App_Store.svg></object>".link("https://apps.apple.com/app/id1507403095");
-                document.getElementById("app_link").innerHTML += "<object type=image/svg+xml data=SVG/Google_Play.svg></object>".link("https://play.google.com/store/apps/details?id=com.bluecocker.welcomevegas");
-            }
+        // Si l'OS est Android, afficher uniquement le lien Android
+        else if (OSName === "Android") {
+            appLinkHTML = appLinks.Android;
         }
-        else if (UsageSelect == "welcome_moon") {
-            document.getElementById("deck").classList.remove("hide");
-            document.getElementById("select_before_rulesbook").classList.add("hide");
-            
-            loadPDF("PDF/welcome-to-the-moon-regle.pdf");
-
-            CardList1 = cardData.moon.numbers;
-            CardList2 = cardData.moon.faces;
-
-            refillCards(1);
-            refillCards(2);
-
-        }
-        else if (UsageSelect == "custom") {
-            document.getElementById("setup").classList.remove("hide");
-            loadPDF("");
-        }
+        // Sinon, afficher les deux liens
         else {
-            loadPDF("");
+            appLinkHTML = appLinks.iOS + " " + appLinks.Android;
         }
+
+        document.getElementById("app_link").innerHTML = appLinkHTML;
+        
+        document.getElementById("select_before_scoreboard").classList.add("hide");
+    } else {
+        document.getElementById("app_link").innerHTML = "";
+        
+        document.getElementById("select_before_scoreboard").classList.remove("hide");
     }
+}
 
-    function custom_setup() {
-        let setupCardContent1 = document.getElementById("setup-card-content1").value;
-        let setupCards1 = setupCardContent1.split("\n");
-        let setupCardContent2 = document.getElementById("setup-card-content2").value;
-        let setupCards2 = setupCardContent2.split("\n");
-        for (let i1 = 0; i1 < setupCards1.length; i1++) {
-            if (setupCards1[i1] == "") {
-                setupCards1.splice(i1, 1);
-                i1--;
-            }
-        }
-        for (let i2 = 0; i2 < setupCards2.length; i2++) {
-            if (setupCards2[i2] == "") {
-                setupCards2.splice(i2, 1);
-                i2--;
-            }
-        }
-
-        if (setupCards1.length > 3) {
-            CardList1 = [];
-            CardList1 = setupCards1.slice();
-            CardList2 = [];
-            CardList2 = setupCards2.slice();
-
-            console.log("INFO: The following cards were parsed.");
-            console.log(CardList1);
-            console.log(CardList2);
-
-            document.getElementById("setup").classList.add("hide");
-            document.getElementById("deck").classList.remove("hide");
-
-            refillCards(1);
-            refillCards(2);
-        }
-    }
 
 // -------------------------------------------- DRAFT BOTH --------------------------------------------
 
-    function shuffle(a) {
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
+// Fonction pour mélanger les cartes
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function drawCard() {
+    if (UsageSelect == "custom") {
+        custom_draw();
+    }
+    else {
+        welcome_draw();
+    }
+}
+
+
+// -------------------------------------------- CUSTOM DECK --------------------------------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+  const numDecksInput = document.getElementById('numDecks');
+  const configureDecksButton = document.getElementById('configureDecksButton');
+  const generateDecksButton = document.getElementById('generateDecksButton');
+  const modifyDecksButton = document.getElementById('modifyDecksButton');
+  const deckConfiguration = document.getElementById('deckConfiguration');
+  const decksContainer = document.getElementById('decksContainer');
+  const drawSection = document.getElementById('drawSection');
+  const drawnCardsContainer = document.getElementById('drawnCardsContainer');
+  let decks = [];
+
+  // Affichage des champs de configuration des decks
+  configureDecksButton.addEventListener('click', () => {
+    const numDecks = parseInt(numDecksInput.value, 10);
+    decksContainer.innerHTML = ''; // Reset container
+    for (let i = 0; i < numDecks; i++) {
+      const deckDiv = document.createElement('div');
+      deckDiv.classList.add('deck-config');
+      deckDiv.innerHTML = `
+        <label for="deck${i}">Cartes du deck ${i + 1} (une par ligne) :</label>
+        <textarea id="deck${i}" rows="4"></textarea>
+        <label for="drawCount${i}">Nombre de cartes à tirer :</label>
+        <input type="number" id="drawCount${i}" min="1" value="1">
+      `;
+      decksContainer.appendChild(deckDiv);
+    }
+    deckConfiguration.classList.remove('hide');
+  });
+
+  // Génération des decks
+  generateDecksButton.addEventListener('click', () => {
+    decks = [];
+    const numDecks = parseInt(numDecksInput.value, 10);
+    for (let i = 0; i < numDecks; i++) {
+      const cards = document.getElementById(`deck${i}`).value.split('\n').filter(card => card.trim() !== '');
+      decks.push({
+        cards: shuffle(cards), // Utilisation de la fonction shuffle
+        drawCount: parseInt(document.getElementById(`drawCount${i}`).value, 10),
+        drawn: []
+      });
+    }
+    drawnCardsContainer.innerHTML = ''; // Réinitialisation du conteneur
+    deckConfiguration.classList.add('hide');
+    drawSection.classList.remove('hide');
+  });
+
+  // Modification des decks
+  modifyDecksButton.addEventListener('click', () => {
+    deckConfiguration.classList.remove('hide');
+    drawSection.classList.add('hide');
+  });
+
+  // Tirage des cartes
+  document.getElementById('draw_Button').addEventListener('click', () => {
+    drawnCardsContainer.innerHTML = ''; // Clear previous drawn cards
+    decks.forEach((deck, index) => {
+      const deckCardsDiv = document.createElement('div');
+      deckCardsDiv.innerHTML = `<strong>Deck ${index + 1} :</strong>`;
+      drawnCardsContainer.appendChild(deckCardsDiv);
+      
+      if (deck.cards.length === 0) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.innerText = `Le deck ${index + 1} est vide. Mélangez-le pour continuer.`;
+        
+        // Ajout d'un bouton pour remélanger le deck
+        const shuffleButton = document.createElement('button');
+        shuffleButton.innerText = `Remélanger le deck ${index + 1}`;
+        shuffleButton.addEventListener('click', () => {
+          deck.cards = shuffle(deck.drawn);
+          deck.drawn = [];
+          emptyMessage.remove(); // Retire le message de deck vide
+          shuffleButton.remove(); // Retire le bouton de remélange
+        });
+
+        drawnCardsContainer.appendChild(emptyMessage);
+        drawnCardsContainer.appendChild(shuffleButton);
+      } else {
+        deck.drawn = []; // Réinitialiser les cartes déjà tirées pour ce deck
+        for (let i = 0; i < deck.drawCount; i++) {
+          if (deck.cards.length > 0) {
+            const drawnCard = deck.cards.shift();
+            deck.drawn.push(drawnCard);
+            
+            // Afficher chaque tirage avec un numéro
+            const drawMessage = document.createElement('p');
+            drawMessage.innerText = `Tirage ${i + 1}: ${drawnCard}`;
+            deckCardsDiv.appendChild(drawMessage);
+          }
         }
-        return a;
+      }
+    });
+  });
+});
+
+/*
+ * let initialDecks = {};  // Stocker la configuration initiale des decks
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Bouton pour continuer le tirage
+    document.getElementById('continueDrawButton').addEventListener('click', function() {
+        getCustomDeckData();  // Continuer le tirage
+    });
+});
+
+// -------------------------------------------- Cacher la Configuration après Validation et Afficher les Résultats --------------------------------------------
+
+function generateDeckInputs() {
+    const deckCount = document.getElementById('deckCount').value;
+    const deckInputsContainer = document.getElementById('deckInputs');
+    deckInputsContainer.innerHTML = '';  // Effacer les anciens inputs
+
+    for (let i = 0; i < deckCount; i++) {
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck-config';
+
+        // Label et champ pour les cartes
+        const deckLabel = document.createElement('label');
+        deckLabel.textContent = `Cartes pour Deck ${i + 1} (une par ligne)`;
+        
+        const deckTextarea = document.createElement('textarea');
+        deckTextarea.id = `deck-${i}`;
+        deckTextarea.rows = 5;
+        deckTextarea.placeholder = 'Entrez les cartes ligne par ligne...';
+
+        // Sélection du nombre de tirages
+        const drawLabel = document.createElement('label');
+        drawLabel.textContent = `Nombre de tirages pour Deck ${i + 1}`;
+        
+        const drawInput = document.createElement('input');
+        drawInput.type = 'number';
+        drawInput.id = `draw-${i}`;
+        drawInput.name = `draw-${i}`;
+        drawInput.min = 1;
+        drawInput.max = 10;
+        drawInput.value = 1;
+
+        deckDiv.appendChild(deckLabel);
+        deckDiv.appendChild(deckTextarea);
+        deckDiv.appendChild(drawLabel);
+        deckDiv.appendChild(drawInput);
+        deckInputsContainer.appendChild(deckDiv);
     }
 
-    function drawCard() {
-        document.getElementById("tirage").classList.remove("hide");
+    document.getElementById('submitConfig').style.display = 'block';  // Afficher le bouton Valider
+}
 
-        if (UsageSelect == "custom") {
-            custom_draw();
-        }
 
-        else {
-            welcome_draw();
-        }
+// -------------------------------------------- Valider et cacher le formulaire --------------------------------------------
+
+function finalizeConfiguration() {
+    const deckCount = document.getElementById('deckCount').value;
+
+    // Sauvegarder la configuration initiale
+    for (let i = 0; i < deckCount; i++) {
+        initialDecks[`deck-${i}`] = document.getElementById(`deck-${i}`).value.split('\n').filter(card => card.trim() !== '');
+        initialDecks[`draw-${i}`] = document.getElementById(`draw-${i}`).value;
     }
 
+    document.getElementById('custom-setup').style.display = 'none';  // Cacher tout le formulaire custom-setup
+    document.getElementById('modifyConfig').style.display = 'block';  // Afficher le bouton Modifier
+
+    // Lancer le premier tirage
+    getCustomDeckData();
+}
+
+// -------------------------------------------- Restaurer la configuration initiale --------------------------------------------
+
+function reopenConfiguration() {
+    const deckCount = Object.keys(initialDecks).length / 2;  // Compter les decks sauvegardés
+
+    document.getElementById('deckInputs').innerHTML = '';  // Vider les inputs actuels
+
+    for (let i = 0; i < deckCount; i++) {
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck-config';
+
+        // Label et champ pour les cartes
+        const deckLabel = document.createElement('label');
+        deckLabel.textContent = `Cartes pour Deck ${i + 1} (une par ligne)`;
+
+        const deckTextarea = document.createElement('textarea');
+        deckTextarea.id = `deck-${i}`;
+        deckTextarea.rows = 5;
+        deckTextarea.value = initialDecks[`deck-${i}`].join('\n');  // Restaurer les cartes initiales
+
+        // Sélection du nombre de tirages
+        const drawLabel = document.createElement('label');
+        drawLabel.textContent = `Nombre de tirages pour Deck ${i + 1}`;
+
+        const drawInput = document.createElement('input');
+        drawInput.type = 'number';
+        drawInput.id = `draw-${i}`;
+        drawInput.value = initialDecks[`draw-${i}`];  // Restaurer le nombre de tirages initial
+
+        deckDiv.appendChild(deckLabel);
+        deckDiv.appendChild(deckTextarea);
+        deckDiv.appendChild(drawLabel);
+        deckDiv.appendChild(drawInput);
+        document.getElementById('deckInputs').appendChild(deckDiv);
+    }
+
+    document.getElementById('custom-setup').style.display = 'block';  // Afficher le formulaire
+    document.getElementById('modifyConfig').style.display = 'none';  // Cacher le bouton Modifier
+}
+
+// -------------------------------------------- Tirage par Deck et Affichage des Résultats --------------------------------------------
+
+function getCustomDeckData() {
+    const deckCount = document.getElementById('deckCount').value;
+    const tirageResult = document.getElementById('tirageResult');
+    tirageResult.innerHTML = '';  // Effacer les anciens résultats
+
+    let allDecksEmpty = true;
+
+    for (let i = 0; i < deckCount; i++) {
+        const deckCards = document.getElementById(`deck-${i}`).value.split('\n').filter(card => card.trim() !== '');
+        const drawCount = document.getElementById(`draw-${i}`).value;
+
+        // Si le deck est vide, proposer un remélange
+        if (deckCards.length === 0) {
+            // Ne pas afficher le message de deck vide
+            tirageResult.innerHTML += `<p><button onclick="reshuffleDeck(${i})">Remélanger le deck</button></p>`;
+        } else {
+            allDecksEmpty = false;
+            // Appel à performCustomDraw(deckCards, drawCount, i); ici si besoin
+        }
+
+        // Remplacer les cartes dans le textarea par celles qui restent
+        document.getElementById(`deck-${i}`).value = deckCards.join('\n');
+    }
+
+    // Si tous les decks sont vides, cacher le bouton "Continuer le tirage"
+    if (allDecksEmpty) {
+        document.getElementById('continueDrawButton').style.display = 'none';
+    } else {
+        document.getElementById('continueDrawButton').style.display = 'block';  // Afficher le bouton pour continuer
+    }
+}
+
+// Fonction pour remélanger le deck vide et relancer le tirage
+function reshuffleDeck(deckIndex) {
+    const deckCards = initialDecks[`deck-${deckIndex}`];
+    document.getElementById(`deck-${deckIndex}`).value = shuffle(deckCards).join('\n');  // Remélanger et réafficher les cartes
+
+    // Mettre à jour l'affichage pour ne pas pouvoir recliquer sur "Remélanger"
+    const tirageResult = document.getElementById('tirageResult');
+    tirageResult.innerHTML += `<p>Deck ${deckIndex + 1} a été remélangé. Vous pouvez continuer le tirage.</p>`;
+    
+    // Cacher le bouton "Remélanger" pour éviter de recliquer
+    const remélangerButton = document.querySelector(`#tirageResult button[onclick="reshuffleDeck(${deckIndex})"]`);
+    if (remélangerButton) {
+        remélangerButton.style.display = 'none';
+    }
+
+    // Afficher le bouton "Continuer le tirage"
+    document.getElementById('continueDrawButton').style.display = 'block';
+}
+
+function performCustomDraw(deck, drawCount, deckIndex) {
+    const tirageResult = document.getElementById('tirageResult');
+    const shuffledDeck = shuffle(deck);  // Mélanger les cartes
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'deck-result';
+
+    resultDiv.innerHTML = `<h4>Résultats pour Deck ${deckIndex + 1}</h4>`;
+    for (let i = 0; i < drawCount; i++) {
+        if (shuffledDeck[i]) {
+            resultDiv.innerHTML += `<p>Tirage ${i + 1}: ${shuffledDeck[i]}</p>`;
+            deck.splice(deck.indexOf(shuffledDeck[i]), 1);  // Supprimer la carte du deck après le tirage
+        } else {
+            resultDiv.innerHTML += `<p>Tirage ${i + 1}: Pas assez de cartes dans le deck.</p>`;
+        }
+    }
+    tirageResult.appendChild(resultDiv);
+}
+*/
 
 // -------------------------------------------- DRAFT WELCOME TO --------------------------------------------
 
-    function welcome_draw() {    
+function welcome_draw() {    
 
-        if (Deck1.length < 3) {
-            refillCards(1);
-        }
+    if (Deck1.length < 3) {
+        refillCards(1);
+    }
 
-        if (Deck2.length < 6) {
-            refillCards(2);
-        }
+    if (Deck2.length < 6) {
+        refillCards(2);
+    }
 
-        let card1 = [];
-        let tirage = "<hr /><h4>Tirage :</h4><br/>";
+    let card1 = [];
 
+    for (let i = 0; i < 3; i++) {
+        card1.push(Deck1.pop());
+        card2.push(Deck2.pop());
+        card2.push(Deck2.pop());
+
+        num_SVG[i].textContent = card1[0];
+        num_SVG2[i].textContent = card1[0];
+        SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[0] + ".svg");
+    }
+    
+    for (let i2 = 0; i2 < 3; i2++) {
+        SVG2[i2].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[i2] + ".svg");
+    }
+}
+
+function refillCards(Deck) {
+
+    if (Deck == 1) {
+        Deck1 = [];
+        Deck1 = CardList1.slice();
+        Deck1 = shuffle(Deck1);
+    }
+    else {
+        Deck2 = [];
+        Deck2 = CardList2.slice();
+        Deck2 = shuffle(Deck2);
+    }
+
+    if (card2 != []) {
         for (let i = 0; i < 3; i++) {
-            card1.push(Deck1.pop());
-            card2.push(Deck2.pop());
-            card2.push(Deck2.pop());
-
-            num_SVG[i].textContent = card1[0];
-            num_SVG2[i].textContent = card1[0];
-            SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[0] + ".svg");
-
-            tirage = tirage + card1.shift() + " - " + card2.shift() + "<br/>";
+            let index_del = Deck2.indexOf(card2[0]);
+            Deck2.splice(index_del,1);
         }
-
-        tirage = tirage + "<br/><hr /><h4>Prochaines cartes :</h4><br/>";
-
-        for (let i2 = 0; i2 < 3; i2++) {
-            SVG2[i2].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + card2[i2] + ".svg");
-
-            tirage = tirage + "xx - " + card2[i2] + "<br/>";
-        }
-
-        console.log(tirage);
-        //document.getElementById("tirage").innerHTML = tirage;
     }
 
-    function refillCards(Deck) {
+    console.log("INFO: Deck was refilled and shuffled.");
 
-        if (Deck == 1) {
-            Deck1 = [];
-            Deck1 = CardList1.slice();
-            Deck1 = shuffle(Deck1);
-        }
-        else {
-            Deck2 = [];
-            Deck2 = CardList2.slice();
-            Deck2 = shuffle(Deck2);
-        }
-
-        if (card2 != []) {
-            for (let i = 0; i < 3; i++) {
-                let index_del = Deck2.indexOf(card2[0]);
-                Deck2.splice(index_del,1);
-            }
-        }
-
-        console.log("INFO: Deck was refilled and shuffled.");
-
-    }
-
-
-// -------------------------------------------- DRAFT CUSTOM --------------------------------------------
-
-    function custom_draw() {
-        if (Deck1.length < 3) {
-            refillCards(1);
-        }
-
-        if (Deck2.length < 3) {
-            refillCards(2);
-        }
-
-        let card1;
-        let card2;
-        let tirage = "";
-
-        for (let i = 0; i < 3; i++) {
-            card1 = Deck1.pop();
-            card2 = Deck2.pop();
-            tirage = tirage + card1 + " - " + card2 + "<br/>";
-        }
-
-        document.getElementById("tirage").innerHTML = tirage;
-        console.log(tirage);
-    }
+}
 
 
 // -------------------------------------------- Modale closing + onclick listener --------------------------------------------
@@ -371,42 +583,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// -------------------------------------------- PDF on mobile --------------------------------------------
-
-
-var scale = window.innerWidth < 600 ? 0.5 : 1.0;  // 0.5 pour mobile, 1.0 pour les écrans plus larges
-
-window.addEventListener('resize', function() {
-    scale = window.innerWidth < 600 ? 0.5 : 1.0;
-    renderPage(pageNum);  // Redessine la page actuelle avec la nouvelle échelle
-});
-
-
-// -------------------------------------------- PDF scroll + load --------------------------------------------
-
-function renderAllPages() {
-    for (let num = 1; num <= pdfDoc.numPages; num++) {
-        pdfDoc.getPage(num).then(function(page) {
-            var viewport = page.getViewport({ scale: 1.5 });
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            // Ajouter le canevas dans le conteneur
-            document.getElementById('pdf-container').appendChild(canvas);
-
-            var renderContext = {
-                canvasContext: ctx,
-                viewport: viewport
-            };
-            page.render(renderContext);
-        });
-    }
-}
+// -------------------------------------------- PDF load + scroll --------------------------------------------
 
 // Initialiser le PDF
 function loadPDF(url) {
+    document.getElementById("pdf-container").innerText = "";
+    document.getElementById("pdf_download_link").href = url;
+
+    
     pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
         pdfDoc = pdfDoc_;
         renderAllPages();  // Afficher toutes les pages dans le conteneur
@@ -418,3 +602,35 @@ function loadPDF(url) {
         console.error("Erreur lors du chargement du PDF:", error);
     });
 }
+
+function renderAllPages() {
+    for (let num = 1; num <= pdfDoc.numPages; num++) {
+        pdfDoc.getPage(num).then(function(page) {
+            let viewport = page.getViewport({ scale: 1.5 });
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Ajouter le canevas dans le conteneur
+            document.getElementById('pdf-container').appendChild(canvas);
+
+            let renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            page.render(renderContext);
+        });
+    }
+}
+
+
+// -------------------------------------------- PDF on mobile --------------------------------------------
+
+
+let scale = window.innerWidth < 600 ? 0.5 : 1.0;  // 0.5 pour mobile, 1.0 pour les écrans plus larges
+
+window.addEventListener('resize', function() {
+    scale = window.innerWidth < 600 ? 0.5 : 1.0;
+    renderPage(pageNum);  // Redessine la page actuelle avec la nouvelle échelle
+});

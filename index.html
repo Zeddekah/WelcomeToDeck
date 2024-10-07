@@ -33,24 +33,51 @@
                 </select>
                 <button id="option_list_button" type="button" value="Envoyer">Envoyer</button>
             </form>
-        </div>
+         </div>
+         
+         <div id="custom_setup" class="hide">
+            <div id="deck-setup">
+  <label for="numDecks">Nombre de decks :</label>
+  <input type="number" id="numDecks" min="1" value="1">
+  <button id="configureDecksButton">Configurer les decks</button>
+</div>
 
-        <div class="hide">
+<div id="deckConfiguration" class="hide">
+  <div id="decksContainer"></div>
+  <button id="generateDecksButton">Générer les decks</button>
+</div>
+
+<div id="drawSection" class="hide">
+  <button id="modifyDecksButton">Modifier les decks</button>
+  <div id="drawnCardsContainer"></div> <!-- Conteneur pour afficher les cartes tirées -->
+  <button id="draw_Button">Tirer les cartes</button>
+</div>
+         </div>
+
+        <!-- <div id="custom_setup" class="hide">
             <hr />
-            <form id="setup" onsubmit="manual_setup();">
-                    <label for="setup-card-content1">Card content 1</label>
-                    <textarea class="form-control" id="setup-card-content1" rows="5"></textarea>
-                    <label for="setup-card-content2">Card content 2</label>
-                    <textarea class="form-control" id="setup-card-content2" rows="5"></textarea>
-                    <small class="form-text text-muted">One card per line. Supports basic HTML.</small>
-                    <button type="button" class="btn btn-lg btn-success" onclick="manual_setup();">Go!</button>
-            </form>
-        </div>
+            <form id="custom-setup">
+                <label for="deckCount">Nombre de decks</label>
+                <input type="number" id="deckCount" name="deckCount" min="1" max="10" value="1" />
 
-        <div id="deck" class="hide">
+                <button type="button" onclick="generateDeckInputs()">Configurer les decks</button>
+
+                <div id="deckInputs"></div> // Conteneur pour les champs de texte des decks
+
+                <button id="submitConfig" type="button" onclick="finalizeConfiguration()" style="display:none;">Valider la configuration</button>
+            </form>
+
+            <button id="modifyConfig" type="button" onclick="reopenConfiguration()" style="display:none;">Modifier la configuration</button>
             
-            <div id="SVG" class="text-center">
-                <hr /><h4>Tirage :</h4>                
+            <button id="continueDrawButton" style="display:none;">Continuer le tirage</button>
+
+            <div id="tirageResult"></div> // Résultat des tirages affiché ici
+        </div>
+     -->
+
+        <div id="deck" class="hide text-center">
+            <hr /><h4>Tirage :</h4>
+            <div id="tirage-svg-container">
                 <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                     <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
                     <image class="SVG" xlink:href="" x=0 y=0></image>
@@ -70,34 +97,35 @@
                     <image class="SVG" xlink:href="" x=0 y=0></image>
                     <text class="num_SVG" x=36 y=50>X</text>
                     <text class="num_SVG2" x=124 y=230>X</text>
-                </svg>
-                <p class="text-center">
-                   <button id="drawButton" onclick="drawCard();">Draw a card</button>
-                </p><h4>Prochaines cartes :</h4>
-                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
-                    <image class="SVG2" xlink:href="" x=0 y=0></image>
-                    <text x=36 y=50>X</text>
-                    <text x=124 y=230>X</text>
-                </svg>
-                
-                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
-                    <image class="SVG2" xlink:href="" x=0 y=0></image>
-                    <text x=36 y=50>X</text>
-                    <text x=124 y=230>X</text>
-                </svg>
-                
-                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
-                    <image class="SVG2" xlink:href="" x=0 y=0></image>
-                    <text x=36 y=50>X</text>
-                    <text x=124 y=230>X</text>
                 </svg>
             </div>
-
-            <p id="tirage" class="hide"></p>
-            
+                <p>
+                    <br />
+                    <button id="drawButton" onclick="drawCard();">Draw a card</button>
+                </p>
+            <h4>Prochaines cartes :</h4>
+            <div id="prochaines-cartes-svg-container">
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+                
+                <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
+                    <image class="SVG2" xlink:href="" x=0 y=0></image>
+                    <text x=36 y=50>X</text>
+                    <text x=124 y=230>X</text>
+                </svg>
+            </div>            
         </div>
         
         <footer>
@@ -105,8 +133,8 @@
                 <tbody>
                     <tr>
                         <td id="rulesbook_link">Livret de règles</td>
-                        <td id="scoreboard_link">Livret de règles</td>
-                        <td id="credits_link">Livret de règles</td>
+                        <td id="scoreboard_link">Feuille de score (App mobile)</td>
+                        <td id="credits_link">Crédits</td>
                 </tbody>
             </table>
          </footer>
@@ -119,8 +147,8 @@
                 
                     
                 <div id="PDF_rules" class="hide">
-                    <a href="">PDF download link</a>
-                    <div id="pdf-container" style="overflow-y: scroll; height: 100%; max-height: 600px;">
+                    <a id="pdf_download_link" href="">PDF download link</a>
+                    <div id="pdf-container">
                         <!-- Les pages PDF seront chargées ici -->
                     </div>
                 </div>
@@ -144,7 +172,7 @@
                 <h1>Credits</h1>
                 <ul>
                     <li>
-                        Code inspired by <a href=https://github.com/pwlinkas/virtudeck>Vitudeck by pwlinkas</a>
+                        Code inspired by <a href=https://github.com/pwlinkas/virtudeck>Virtudeck by pwlinkas</a>
                     </li>
                     <li>
                         Card design based on <a href="https://fr.freepik.com/vecteurs-libre/illustration-du-motif-cartes-jouer_94924448.htm">Freepik Design</a>
