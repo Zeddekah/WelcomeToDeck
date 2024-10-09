@@ -235,6 +235,7 @@ body {
     color: #333;  /* Couleur du texte */
     min-height: 100vh; /* Assure que le corps prend au moins toute la hauteur de la fenêtre */
     padding-bottom: 40px; /* Ajustez la valeur selon la hauteur de votre footer */
+    overflow: auto; /* Permet de forcer le calcul correct des dimensions */
 }
 
 h1, h2, h3 {
