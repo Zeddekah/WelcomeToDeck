@@ -233,8 +233,8 @@ body {
     font-size: 16px;
     line-height: 1.6;  /* Espacement des lignes pour la lisibilité */
     color: #333;  /* Couleur du texte */
-    min-height: 100vh; /* Assure que le corps prend au moins toute la hauteur de la fenêtre */
-    padding-bottom: 40px; /* Ajustez la valeur selon la hauteur de votre footer */
+    margin: 0;
+    min-height: calc(100vh - 50px); /* Ajustez 50px selon la hauteur de votre footer */
     overflow: auto; /* Permet de forcer le calcul correct des dimensions */
 }
 
