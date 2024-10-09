@@ -58,13 +58,24 @@ img {
     width: 200px;
 }
 
-.bottom {
+footer {
     position: fixed;
-    left: 0;
     bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px; /* Définir la hauteur de votre footer */
+    background-color: #F3F3F3; /* Couleur de fond pour le footer */
+    color: #333; /* Couleur du texte */
+    line-height: 60px; /* Centrer le texte verticalement */
+}
+
+footer table {
+    position: absolute;           /* Positionne la table de manière absolue */
     width: 100%;
+    top: 50%;                    /* Déplace la table à 50% du haut du footer */
+    left: 50%;                   /* Déplace la table à 50% du côté gauche du footer */
+    transform: translate(-50%, -50%);
     text-align: center;
-    background-color: #F3F3F3;
     padding: 5px;
     table-layout: fixed;
 }
@@ -222,6 +233,8 @@ body {
     font-size: 16px;
     line-height: 1.6;  /* Espacement des lignes pour la lisibilité */
     color: #333;  /* Couleur du texte */
+    min-height: 100vh; /* Assure que le corps prend au moins toute la hauteur de la fenêtre */
+    padding-bottom: 40px; /* Ajustez la valeur selon la hauteur de votre footer */
 }
 
 h1, h2, h3 {
