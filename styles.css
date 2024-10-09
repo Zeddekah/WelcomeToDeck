@@ -194,7 +194,7 @@ button:hover, .card:hover, .modal-content:hover {
     transform: translateY(-3px);  /* Légère élévation au survol */
 }
 
-#option_list_button {
+.small_button {
     background-color: #28a745;  /* Vert */
     color: white;  /* Texte blanc */
     padding: 5px 10px;  /* Plus compact avec moins de padding */
@@ -205,12 +205,12 @@ button:hover, .card:hover, .modal-content:hover {
     transition: background-color 0.3s ease, transform 0.2s ease;  /* Transition fluide */
 }
 
-#option_list_button:hover {
+.small_button:hover {
     background-color: #218838;  /* Vert foncé au survol */
     transform: translateY(-1px);  /* Légère élévation au survol */
 }
 
-#option_list_button:active {
+.small_button:active {
     background-color: #1e7e34;  /* Vert encore plus foncé au clic */
     transform: translateY(0);  /* Retour à la position initiale au clic */
 }
