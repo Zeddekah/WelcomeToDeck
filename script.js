@@ -503,6 +503,8 @@ function saveAllState() {
 
     // Sauvegarde dans le localStorage
     localStorage.setItem('pageState', JSON.stringify(state));
+    
+    console.log("Fin de fonction savegarde état page");
 }
 
 // Fonction pour restaurer l'état des variables
