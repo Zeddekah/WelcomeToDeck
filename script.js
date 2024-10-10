@@ -476,3 +476,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// -------------------------------------------- Cookies etat variables --------------------------------------------
+
+// Fonction pour sauvegarder l'état des variables
+function saveAllState() {
+    const state = {
+        variables: {
+            Decks,
+            Tirage_Carte_Action
+        },
+        elements: {
+            actuelles_cartes_svg: document.getElementById('actuelles_cartes_svg_container').innerHTML,
+            prochaines_cartes_svg: document.getElementById('prochaines_cartes_svg_container').innerHTML,
+            usage_select_value: document.getElementById("usage_select").value
+        },
+        hides: {}
+    };
+
+    // Sauvegarder les états "hide" des éléments
+    document.querySelectorAll('*').forEach(element => {
+        if (element.id) {
+            state.hides[element.id] = element.classList.contains('hide');
+        }
+    });
+
+    // Sauvegarde dans le localStorage
+    localStorage.setItem('pageState', JSON.stringify(state));
+}
+
+// Fonction pour restaurer l'état des variables
+function restoreAllState() {
+    const state = JSON.parse(localStorage.getItem('pageState'));
+
+    if (state) {
+        // Restauration selection
+        document.getElementById("usage_select").value = state.elements.usage_select_value;
+        option_choosen();
+        
+        if (options[state.elements.usage_select_value]) {
+            // Restaurer le deck et le tirage
+            Decks = state.variables.Decks;
+            Tirage_Carte_Action = state.variables.Tirage_Carte_Action;
+
+            // Restaurer le contenu des cartes tirées
+            document.getElementById('actuelles_cartes_svg_container').innerHTML = state.elements.actuelles_cartes_svg;
+            document.getElementById('prochaines_cartes_svg_container').innerHTML = state.elements.prochaines_cartes_svg;
+        }
+        else if (state.elements.usage_select_value === "custom") {
+            // WIP
+        }
+            
+        // Appliquer les classes "hide" ou les retirer selon l'état sauvegardé
+        for (let id in state.hides) {
+            let element = document.getElementById(id);
+            if (element) {
+                if (state.hides[id]) {
+                    element.classList.add('hide'); // Ajouter la classe 'hide' si l'état est vrai
+                } else {
+                    element.classList.remove('hide'); // Retirer la classe 'hide' si l'état est faux
+                }
+            }
+        }
+    }
+    console.log("Fin de fonction restauration état page");
+}
+
+// Sauvegarder automatiquement l'état lors de changements
+document.addEventListener('DOMContentLoaded', function() {
+    // Événements pour restaurer & sauvegarder automatiquement
+    restoreAllState();
+    window.addEventListener('beforeunload', saveAllState);
+});
+
+// Fonction pour réinitialiser la page
+function resetPage() {
+    // Effacer le localStorage
+    localStorage.clear();
+
+    // Recharger la page pour revenir à l'état d'origine
+    location.reload();
+}
+
+// Événement pour le bouton de réinitialisation
+document.getElementById('resetButton').addEventListener('click', resetPage);

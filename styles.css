@@ -95,6 +95,7 @@ footer {
     z-index: 1000; /* Pour s'assurer qu'il est au-dessus des autres éléments */
     padding: 0;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile pour démarquer le footer */
+    border-top: 1px solid #ccc; /* Bordure en bas pour séparer */
 }
 
 footer table {
@@ -112,6 +113,81 @@ footer td {
     padding: 0 15px; /* Espacement interne des cellules légèrement augmenté */
     border: none; /* Pas de bordures pour garder un style minimaliste */
     transition: color 0.3s ease; /* Transition fluide pour le changement de couleur de texte */
+}
+
+header {
+    display: flex; 
+    justify-content: flex-end; /* Place le bouton à droite */
+    align-items: center; 
+    padding: 10px; 
+    background-color: #f8f9fa; /* Couleur de fond du header */
+}
+
+/* Styles globaux pour tous les boutons */
+button {
+    background-color: #28a745;  /* Couleur principale */
+    color: white;  /* Texte en blanc */
+    border: none;  /* Pas de bordure */
+    border-radius: 5px;  /* Bordures arrondies */
+    padding: 10px 20px;  /* Espacement interne */
+    font-size: 16px;  /* Taille de la police */
+    cursor: pointer;  /* Curseur pointeur au survol */
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Transition fluide */
+}
+
+/* Effets pour tous les boutons au survol */
+button:hover {
+    background-color: #218838;  /* Changement de couleur au survol */
+    transform: translateY(-2px);  /* Effet d'élévation au survol */
+}
+
+button:active {
+    transform: translateY(0);  /* Réinitialisation de l'élévation lors du clic */
+}
+
+button, .card, .modal-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition sur l'ombre et le mouvement */
+}
+
+button:hover, .card:hover, .modal-content:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Augmente l'ombre au survol */
+    transform: translateY(-3px);  /* Légère élévation au survol */
+}
+
+/* Styles spécifiques pour le bouton de réinitialisation */
+#resetButton {
+    background-color: transparent; /* Discret, pas de couleur de fond */
+    color: #007bff; /* Couleur du texte (lien) */
+    padding: 0; /* Pas d'espacement interne */
+    font-size: 12px; /* Taille de la police plus petite pour discrétion */
+}
+
+/* Effets au survol pour le bouton de réinitialisation */
+#resetButton:hover {
+    text-decoration: underline; /* Souligner au survol */
+    color: #0056b3; /* Couleur au survol */
+}
+
+.small_button {
+    background-color: #28a745;  /* Vert */
+    color: white;  /* Texte blanc */
+    padding: 5px 10px;  /* Plus compact avec moins de padding */
+    font-size: 14px;  /* Police légèrement réduite */
+    border: none;  /* Pas de bordure */
+    border-radius: 3px;  /* Coins légèrement arrondis */
+    cursor: pointer;  /* Curseur pointeur */
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* Transition fluide */
+}
+
+.small_button:hover {
+    background-color: #218838;  /* Vert foncé au survol */
+    transform: translateY(-1px);  /* Légère élévation au survol */
+}
+
+.small_button:active {
+    background-color: #1e7e34;  /* Vert encore plus foncé au clic */
+    transform: translateY(0);  /* Retour à la position initiale au clic */
 }
 
 footer td:hover {
@@ -212,57 +288,6 @@ canvas {
     color: #fe0606;
     font-size: 30px;
     text-decoration: none;
-}
-
-button {
-    background-color: #28a745;  /* Couleur principale (bleu) */
-    color: white;  /* Texte en blanc */
-    border: none;  /* Pas de bordure */
-    border-radius: 5px;  /* Bordures arrondies */
-    padding: 10px 20px;  /* Espacement interne */
-    font-size: 16px;  /* Taille de la police */
-    cursor: pointer;  /* Curseur pointeur au survol */
-    transition: background-color 0.3s ease, transform 0.3s ease;  /* Transition fluide */
-}
-
-button:hover {
-    background-color: #218838;  /* Changement de couleur au survol */
-    transform: translateY(-2px);  /* Effet d'élévation au survol */
-}
-
-button:active {
-    transform: translateY(0);  /* Réinitialisation de l'élévation lors du clic */
-}
-
-button, .card, .modal-content {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition sur l'ombre et le mouvement */
-}
-
-button:hover, .card:hover, .modal-content:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Augmente l'ombre au survol */
-    transform: translateY(-3px);  /* Légère élévation au survol */
-}
-
-.small_button {
-    background-color: #28a745;  /* Vert */
-    color: white;  /* Texte blanc */
-    padding: 5px 10px;  /* Plus compact avec moins de padding */
-    font-size: 14px;  /* Police légèrement réduite */
-    border: none;  /* Pas de bordure */
-    border-radius: 3px;  /* Coins légèrement arrondis */
-    cursor: pointer;  /* Curseur pointeur */
-    transition: background-color 0.3s ease, transform 0.2s ease;  /* Transition fluide */
-}
-
-.small_button:hover {
-    background-color: #218838;  /* Vert foncé au survol */
-    transform: translateY(-1px);  /* Légère élévation au survol */
-}
-
-.small_button:active {
-    background-color: #1e7e34;  /* Vert encore plus foncé au clic */
-    transform: translateY(0);  /* Retour à la position initiale au clic */
 }
 
 .card {
