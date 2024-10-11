@@ -110,6 +110,9 @@ function option_choosen() {
 
     // Sélection de l'option
     UsageSelect = document.getElementById("usage_select").value;
+    
+    console.log("options = " + options);
+    console.log("UsageSelect = " + UsageSelect);
 
     
     if (options[UsageSelect]) {
@@ -263,6 +266,8 @@ console.log(Image_SVG2[i2]);
     }
 
 console.log ("Actions prochaines = " + Tirage_Carte_Action);
+
+saveAllState(); // Appelez la fonction de sauvegarde
 }
 
 function refillCards(num_deck) {
@@ -270,6 +275,8 @@ function refillCards(num_deck) {
     Decks[num_deck] = (num_deck === 0) ? shuffle(selectedOption.cards.numbers.slice()) : shuffle(selectedOption.cards.faces.slice());
 
 console.log(`INFO: Le deck ${num_deck === 0 ? 'de numéros' : 'd\'actions'} a été re-rempli et mélangé.`);
+
+saveAllState(); // Appelez la fonction de sauvegarde
 }
 
 
@@ -296,36 +303,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     // Ouverture des modals
-        function addLinkClickListener(linkId, targetId) {
-            const link = document.getElementById(linkId);
-            if (link) {
-                link.addEventListener('click', function() {
-                    window.location.href = `#${targetId}`;
-                });
-            }
+    function addLinkClickListener(linkId, targetId) {
+        const link = document.getElementById(linkId);
+        if (link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+                openModal(targetId);
+            });
         }
-        // Listeners pour chaque lien
-        addLinkClickListener('rulesbook_link', 'rulesbook');
-        addLinkClickListener('scoreboard_link', 'scoreboard');
-        addLinkClickListener('credits_link', 'credits');
+    }
+
+    // Fonction pour ouvrir un modal
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('show'); // Utilise la classe pour afficher le modal
+            modal.setAttribute('aria-hidden', 'false'); // Accessibilité : indique que le modal est visible
+        }
+    }
 
     // Fermeture des modals
-        function addModalClickListener(modalId) {
+    function addModalClickListener(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.addEventListener('click', function(event) {
+                closeModal(event, modalId);
+            });
+        }
+    }
+
+    function closeModal(event, modalId) {
+        const modalContent = document.querySelector(`#${modalId} .content`);
+        if (!modalContent.contains(event.target)) {
             const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.addEventListener('click', function(event) {
-                    closeModal(event, modalId);
-                });
-            }
+            modal.classList.remove('show'); // Utilise la classe pour masquer le modal
+            modal.setAttribute('aria-hidden', 'true'); // Accessibilité : indique que le modal est masqué
         }
-        function closeModal(event, modalId) {
-            const modalContent = document.querySelector(`#${modalId} .content`);
-            if (!modalContent.contains(event.target)) {
-                window.location.href = '#';  // Closes the modal by resetting the hash
-            }
-        }
-        // Listeners pour chaque modal
-        ['rulesbook', 'scoreboard', 'credits'].forEach(addModalClickListener);
+    }
+
+    // Listeners pour chaque lien
+    ['rulesbook_link', 'scoreboard_link', 'credits_link'].forEach(linkId => {
+        const targetId = linkId.replace('_link', ''); // Remplace "_link" par "" pour obtenir l'ID de modal
+        addLinkClickListener(linkId, targetId);
+    });
+
+    // Listeners pour chaque modal
+    ['rulesbook', 'scoreboard', 'credits'].forEach(addModalClickListener);
 });
 
 
@@ -477,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/*
 // -------------------------------------------- Cookies etat variables --------------------------------------------
 
 // Fonction pour sauvegarder l'état des variables
@@ -548,7 +572,11 @@ function restoreAllState() {
 document.addEventListener('DOMContentLoaded', function() {
     // Événements pour restaurer & sauvegarder automatiquement
     restoreAllState();
-    window.addEventListener('beforeunload', saveAllState);
+    window.addEventListener('beforeunload', function(event) {
+        saveAllState(); // Appelez la fonction de sauvegarde
+        event.preventDefault(); // Annuler l'événement
+        event.returnValue = ''; // Afficher une boîte de dialogue de confirmation
+    });
 });
 
 // Fonction pour réinitialiser la page
@@ -562,3 +590,5 @@ function resetPage() {
 
 // Événement pour le bouton de réinitialisation
 document.getElementById('resetButton').addEventListener('click', resetPage);
+
+*/

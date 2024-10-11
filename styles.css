@@ -63,7 +63,7 @@ svg text {
     text-anchor: middle;
 }
 
-#tirage-svg-container, #prochaines-cartes-svg-container {
+#actuelles_cartes_svg_container, #prochaines_cartes_svg_container {
     display: flex;
     justify-content: center;  /* Espace égal entre les SVG */
     flex-wrap: nowrap;  /* Empêche les SVG de passer à une nouvelle ligne */
@@ -71,7 +71,7 @@ svg text {
     width: 100%;  /* Assurez-vous que le conteneur est fluide */
 }
 
-#tirage-svg-container svg, #prochaines-cartes-svg-container svg {
+#actuelles_cartes_svg_container svg, #prochaines_cartes_svg_container svg {
     max-width: 200px;
     min-width: 100px;
     height: auto;  /* Conserver le ratio d'aspect */
@@ -196,15 +196,21 @@ footer td:hover {
 }
 
 .modal {
-    opacity: 0;  /* Modal masqué au départ */
+    opacity: 0;  
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.7);
-    display: none;
+    display: flex; /* Changer pour flex ici */
     align-items: center;
     justify-content: center;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+    display: flex; /* Affiche le modal */
 }
 
 .modal:target {

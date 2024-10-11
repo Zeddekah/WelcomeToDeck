@@ -9,11 +9,12 @@
      <title>Welcome To Deck</title>
 
      <link href="styles.css" rel="stylesheet" type="text/css" />
-     <script src="script.js" defer></script>
+     <script src="main.js" defer></script>
+     <script src="IndexedDB.js" defer></script>
 
     <!-- Charge PDJ Viewer -->
-     <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-     <script src="PDF_Viewer.js" type="module"></script>
+    <script type="module" src="https://mozilla.github.io/pdf.js/build/pdf.mjs"></script>
+    <script type="module" src="PDF_Viewer.js" defer></script>
  </head>
 
 
@@ -62,7 +63,7 @@
 
     <div id="deck" class="hide text-center">
         <hr /><h4>Tirage :</h4>
-        <div id="tirage-svg-container">
+        <div id="actuelles_cartes_svg_container">
             <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                 <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
                 <image class="Image_SVG" xlink:href="" x=0 y=0></image>
@@ -89,7 +90,7 @@
                 <button id="drawButton">Draw a card</button>
             </p>
         <h4>Prochaines cartes :</h4>
-        <div id="prochaines-cartes-svg-container">
+        <div id="prochaines_cartes_svg_container">
             <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                 <image xlink:href="SVG/Carte_vierge.svg" x=0 y=0></image>
                 <image class="Image_SVG2" xlink:href="" x=0 y=0></image>
@@ -132,15 +133,14 @@
             <h1>Livret de règles</h1>
             <p id="select_before_rulesbook">No rulesbook for this selection</p>
 
-
             <div id="PDF_rules" class="hide">
-                <a id="pdf_download_link" href="">PDF download link</a>
+                <a id="pdf_download_link" href="" target="_blank">PDF download link</a>
                 <div id="pdf-container">
-                    <!-- Les pages PDF seront chargées ici -->
+                    <canvas id="the-canvas"></canvas> <!-- Canvas pour afficher le PDF -->
                 </div>
             </div>
 
-            <a href="#" class="close" >&times;</a>
+            <a href="#" class="close">&times;</a>
         </div>
         <div class="espace_flex"></div>
     </div>
@@ -159,7 +159,7 @@
             <h1>Credits</h1>
             <ul>
                 <li>
-                    Code inspired by <a href=https://github.com/pwlinkas/virtudeck>Virtudeck by pwlinkas</a>
+                    Code inspired by <a href="https://github.com/pwlinkas/virtudeck">Virtudeck by pwlinkas</a>
                 </li>
                 <li>
                     Card design based on <a href="https://fr.freepik.com/vecteurs-libre/illustration-du-motif-cartes-jouer_94924448.htm">Freepik Design</a>
