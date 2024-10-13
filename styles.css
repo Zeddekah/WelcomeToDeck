@@ -78,12 +78,16 @@ svg text {
     flex: 1 1 auto;  /* Permet aux SVG de s'étendre et de se rétrécir */
 }
 
-img {
+.width_200 {
     width: 200px;
 }
 
-.height_value {
+.height_value_40 {
     height: 40px; /* Ajustez la hauteur selon vos besoins */
+}
+
+.height_value_20 {
+    height: 20px; /* Ajustez la hauteur selon vos besoins */
 }
 
 footer {
@@ -156,7 +160,7 @@ button:hover, .card:hover, .modal-content:hover {
 }
 
 /* Styles spécifiques pour le bouton de réinitialisation */
-#resetButton {
+#resetStateButton {
     background-color: transparent; /* Discret, pas de couleur de fond */
     color: #007bff; /* Couleur du texte (lien) */
     padding: 0; /* Pas d'espacement interne */
@@ -164,14 +168,12 @@ button:hover, .card:hover, .modal-content:hover {
 }
 
 /* Effets au survol pour le bouton de réinitialisation */
-#resetButton:hover {
+#resetStateButton:hover {
     text-decoration: underline; /* Souligner au survol */
     color: #0056b3; /* Couleur au survol */
 }
 
 .small_button {
-    background-color: #28a745;  /* Vert */
-    color: white;  /* Texte blanc */
     padding: 5px 10px;  /* Plus compact avec moins de padding */
     font-size: 14px;  /* Police légèrement réduite */
     border: none;  /* Pas de bordure */
@@ -181,13 +183,101 @@ button:hover, .card:hover, .modal-content:hover {
 }
 
 .small_button:hover {
-    background-color: #218838;  /* Vert foncé au survol */
     transform: translateY(-1px);  /* Légère élévation au survol */
 }
 
 .small_button:active {
-    background-color: #1e7e34;  /* Vert encore plus foncé au clic */
     transform: translateY(0);  /* Retour à la position initiale au clic */
+}
+
+.close-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 5px;
+    margin-left: 10px; /* Espacement entre le dé et le bouton */
+}
+
+.close-button:hover {
+    background-color: darkred;
+}
+
+/* Container du toggle */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Masquer le checkbox réel */
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Style du fond du toggle */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* Le cercle à l'intérieur */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Quand le toggle est activé */
+input:checked + .slider {
+  background-color: #4cd964; /* Couleur verte de l'iPhone */
+}
+
+/* Déplacement du cercle lorsque le toggle est activé */
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Ajout d'un effet "On/Off" */
+.slider:after {
+  content: 'OFF';
+  color: white;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 75%;
+  font-size: 12px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after {
+  content: 'ON';
+  left: 25%;
+}
+
+/* Optionnel : styliser le label */
+.toggle-label {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 footer td:hover {
@@ -371,19 +461,6 @@ input[type="number"] {
     margin-bottom: 10px;
 }
 
-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
 #tirageResult {
     margin-top: 20px;
 }
@@ -398,4 +475,35 @@ button:hover {
 .deck-result h4 {
     margin-bottom: 10px;
     color: #007bff;
+}
+
+.dice-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet d'afficher les dés côte à côte */
+    gap: 10px; /* Espacement entre les dés */
+}
+
+.dice {
+    display: flex;
+    align-items: center; /* Centre verticalement les éléments dans le conteneur */
+}
+
+.dice-svg {
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+}
+
+.dice-svg text {
+    font-size: 40px;
+    font-weight: bold;
+    text-anchor: middle;
+    dominant-baseline: middle; /* Centre verticalement */
+}
+
+#imageDisplay {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 20px auto;
+    display: block;
 }

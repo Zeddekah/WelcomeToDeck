@@ -9,18 +9,25 @@
      <title>Welcome To Deck</title>
 
      <link href="styles.css" rel="stylesheet" type="text/css" />
-     <script src="main.js" defer></script>
-     <script src="IndexedDB.js" defer></script>
+     
+     <script src="Javascript/main.js" defer></script>
+     <script src="Javascript/Option_choosen.js" defer></script>
+     <script src="Javascript/Welcome.js" defer></script>
+     <script src="Javascript/Custom.js" defer></script>
+     <script src="Javascript/Dices.js" defer></script>
+     <script src="Javascript/Images.js" defer></script>
+     <script src="Javascript/IndexedDB.js" defer></script>
+     <script src="Javascript/addEventListener.js" defer></script>
 
     <!-- Charge PDJ Viewer -->
     <script type="module" src="https://mozilla.github.io/pdf.js/build/pdf.mjs"></script>
-    <script type="module" src="PDF_Viewer.js" defer></script>
+    <script type="module" src="Javascript/PDF_Viewer.js" defer></script>
  </head>
 
 
  <body>
     <header>
-        <button id="resetButton">Réinitialiser les configurations</button>
+        <button id="resetStateButton">Réinitialiser les configurations</button>
     </header>
      <div class="text-center">
         <h1 class="titre">Welcome To Deck</h1>
@@ -34,31 +41,11 @@
               <option value="welcome_moon">Welcome to the Moon</option>
               <option value="">------</option>
               <option value="custom">Custom (WIP)</option>
+              <option value="dices">Dices (WIP)</option>
+              <option value="images">Images (WIP)</option>
             </select>
             <button id="option_list_button" class="small_button">Selectionner</button>
         </form>
-     </div>
-
-     <div id="custom_setup" class="hide">
-        <div id="deck-setup">
-            <label for="numDecks">Nombre de decks :</label>
-            <input type="number" id="numDecks" min="1" value="1">
-            <button id="configureDecksButton" class="small_button">Configurer les decks</button>
-        </div>
-
-        <div id="deckConfiguration" class="hide">
-            <div id="decksContainer"></div>
-            <button id="generateDecksButton">Générer les decks</button>
-        </div>
-         
-        <button id="modifyDecksButton" class="hide small_button">Modifier les decks</button>
-
-        <div id="drawSection" class="hide">
-            <div class="height_value"></div>
-            <button id="draw_Button">Tirer les cartes</button>
-            <div class="height_value"></div>   
-            <div id="drawnCardsContainer"></div> <!-- Conteneur pour afficher les cartes tirées -->
-        </div>
      </div>
 
     <div id="deck" class="hide text-center">
@@ -113,8 +100,92 @@
             </svg>
         </div>            
     </div>
+
+     <div id="custom_setup" class="hide">
+            <h2>Tirage aléatoire de dé(s)</h2>`
+
+        <div id="deck-setup">
+            <label for="numDecks">Nombre de decks :</label>
+            <input type="number" id="numDecks" min="1" value="1">
+            <button id="configureDecksButton" class="small_button">Configurer les decks</button>
+        </div>
+
+        <div id="deckConfiguration" class="hide">
+            <div id="decksContainer"></div>
+            <button id="generateDecksButton">Générer les decks</button>
+        </div>
+
+        <div id="drawSection" class="hide">
+            <button id="modifyDecksButton" class="hide small_button">Modifier les decks</button>
+            
+            <div class="height_value_20"></div>
+            
+            <label for="toggleDrawMode" class="toggle-label">Mode de tirage :</label>
+            <label class="toggle">
+              <input type="checkbox" id="toggleDrawMode">
+              <span class="slider"></span>
+            </label>
+            <span>Ne pas réutiliser les cartes déjà tirées</span>
+            
+            <div class="height_value_40"></div>
+            
+            <button id="draw_Button">Tirer les cartes</button>
+            
+            <div class="height_value_40"></div>
+            
+            <div id="drawnCardsContainer"></div> <!-- Conteneur pour afficher les cartes tirées -->
+        </div>
+     </div>
      
-     <div class="height_value"></div>
+     <div id="dices_option_container" class="hide">
+         
+         <div class="height_value_20"></div>
+
+        <!-- Sélecteurs pour les types de dés -->
+        <div id="diceSelectors"></div>
+         
+        <!-- Bouton pour ajouter un nouveau dé -->
+        <button id="addDiceButton">Ajouter un dé</button>
+
+        <!-- Bouton pour générer un nouveau tirage -->
+        <button id="rerollButton">Générer un nouveau tirage</button>
+         
+         <div class="height_value_40"></div>
+
+        <!-- Conteneur pour les dés -->
+        <div id="existingContainer" class="dice-container"></div>
+     </div>
+     
+     <div id="images_option_container" class="hide">
+            <h2>Affichage aléatoire d'images</h2>
+
+            <!-- Input pour sélectionner des images -->
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <br><br>
+
+            <!-- Toggle pour choisir si les images sont réutilisables ou non -->
+            <label for="toggleRemove" class="toggle-label">Mode de tirage :</label>
+            <label class="toggle">
+                <input type="checkbox" id="toggleRemove">
+                <span class="slider"></span>
+            </label>
+            <span>Ne pas réutiliser les images déjà affichées</span>
+            <br><br>
+
+            <!-- Conteneur pour le bouton d'affichage ou de réinitialisation -->
+            <div id="buttonContainer">
+                <button id="randomImageButton" disabled>Afficher une image aléatoire</button>
+                <div id="divReset" class="hide">
+                    <span id="resetMessage">Toutes les images ont été affichées.</span>
+                    <button id="imageResetButton">Recommencer le tirage</button>
+                </div>
+            </div>
+
+            <!-- Image affichée -->
+            <img id="imageDisplay" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Aucune image sélectionnée">
+     </div>
+     
+     <div class="height_value_40"></div>
 
     <footer>
         <table>
