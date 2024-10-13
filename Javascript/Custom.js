@@ -1,20 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const numDecksInput = document.getElementById('numDecks');
-  const configureDecksButton = document.getElementById('configureDecksButton');
-  const generateDecksButton = document.getElementById('generateDecksButton');
-  const modifyDecksButton = document.getElementById('modifyDecksButton');
-  const deckConfiguration = document.getElementById('deckConfiguration');
-  const decksContainer = document.getElementById('decksContainer');
-  const drawSection = document.getElementById('drawSection');
-  const drawnCardsContainer = document.getElementById('drawnCardsContainer');
-  const toggleDrawMode = document.getElementById('toggleDrawMode'); // Toggle pour le mode de tirage
-  let decks = [];
+  let customDeckContent = [];
   let previousDrawMode = toggleDrawMode.checked; // Garde une trace de l'état précédent du toggle
+
+  // Regroupe les éléments communs
+  const modifyAndDrawElements = [modifyDecksButton, drawSection];
 
   // Affichage des champs de configuration des decks
   configureDecksButton.addEventListener('click', () => {
-    modifyDecksButton.classList.add("hide");
-    drawSection.classList.add('hide');
+    (modifyAndDrawElements).forEach(element => {
+      toggleVisibility(element,false);
+    });
     const numDecks = parseInt(numDecksInput.value, 10);
     decksContainer.innerHTML = ''; // Reset container
     for (let i = 0; i < numDecks; i++) {
@@ -28,17 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       decksContainer.appendChild(deckDiv);
     }
-    deckConfiguration.classList.remove('hide');
+    toggleVisibility(deckConfiguration,true);
   });
 
   // Génération des decks
   generateDecksButton.addEventListener('click', () => {
-    decks = [];
+    customDeckContent = [];
     const numDecks = parseInt(numDecksInput.value, 10);
     for (let i = 0; i < numDecks; i++) {
       const cards = document.getElementById(`deck${i}`).value.split('\n').filter(card => card.trim() !== '');
 
-      decks.push({
+      customDeckContent.push({
         originalCards: [...cards], // Sauvegarder une copie complète du deck original
         cards: shuffle(cards), // Utilisation de la fonction shuffle
         drawCount: parseInt(document.getElementById(`drawCount${i}`).value, 10),
@@ -46,24 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     drawnCardsContainer.innerHTML = ''; // Réinitialisation du conteneur
-    deckConfiguration.classList.add('hide');
-      
-    modifyDecksButton.classList.remove('hide');
-    drawSection.classList.remove('hide');
+    toggleVisibility(deckConfiguration,false);
+    
+    (modifyAndDrawElements).forEach(element => {
+        toggleVisibility(element,true);
+    });
   });
 
   // Modification des decks
   modifyDecksButton.addEventListener('click', () => {
-      deckConfiguration.classList.remove('hide');
-      modifyDecksButton.classList.add('hide');
-      drawSection.classList.add('hide');
+    toggleVisibility(deckConfiguration,true);
+    (modifyAndDrawElements).forEach(element => {
+        toggleVisibility(element,false);
+    });
   });
 
   // Écouteur pour le changement du toggle avec confirmation
   toggleDrawMode.addEventListener('change', () => {
     if (confirm("Changer le mode de tirage remélangera le deck. Voulez-vous continuer ?")) {
       // Si l'utilisateur confirme, remélanger les cartes dans chaque deck
-      decks.forEach(deck => {
+      customDeckContent.forEach(deck => {
         deck.cards = shuffle([...deck.cards, ...deck.drawn]); // Mélanger toutes les cartes (tirées et non tirées)
         deck.drawn = []; // Réinitialiser les cartes tirées
       });
@@ -75,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Tirage des cartes
-  document.getElementById('draw_Button').addEventListener('click', () => {
+  customDrawButton.addEventListener('click', () => {
     drawnCardsContainer.innerHTML = ''; // Effacer les cartes précédemment tirées
-    decks.forEach((deck, index) => {
+    customDeckContent.forEach((deck, index) => {
       const deckCardsDiv = document.createElement('div');
       deckCardsDiv.innerHTML = `<strong>Deck ${index + 1}</strong>`;
       drawnCardsContainer.appendChild(deckCardsDiv);

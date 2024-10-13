@@ -8,18 +8,18 @@ function option_choosen() {
     loadPDF("");
 
     // Sélection de l'option
-    UsageSelect = document.getElementById("usage_select").value;
+    usageSelectValue = usageSelect.value;
     
     console.log("options = " + options);
-    console.log("UsageSelect = " + UsageSelect);
+    console.log("usageSelectValue = " + usageSelectValue);
 
     
-    if (options[UsageSelect]) {
-        document.getElementById("deck").classList.remove("hide");
-        document.getElementById("select_before_rulesbook").classList.add("hide");
+    if (options[usageSelectValue]) {
+        toggleVisibility(welcome_option_container,true);
+        toggleVisibility(selectBeforeRulesbook,false);
         
-        updateSelectedOption(UsageSelect);
-console.log("options[UsageSelect] = " + options[UsageSelect]);
+        updateSelectedOption(usageSelectValue);
+console.log("options[usageSelectValue] = " + options[usageSelectValue]);
 console.log("selectedOption = " + selectedOption);
         
         const PDFpath = selectedOption.PDFrules;
@@ -48,29 +48,29 @@ console.log("Nombre de cartes détectées (num haut, num bas, Actions svg, Proch
         }
         
         loadAppLink(selectedOption);
-    } else if (UsageSelect === "custom") {
-        document.getElementById("custom_setup").classList.remove("hide");
-        deckConfiguration.classList.add("hide");
-        modifyDecksButton.classList.add("hide");
-        drawSection.classList.add('hide');
-    } else if (UsageSelect === "dices") {
-        document.getElementById("dices_option_container").classList.remove("hide");
-    } else if (UsageSelect === "images") {
-        document.getElementById("images_option_container").classList.remove("hide");
+    } else if (usageSelectValue === "custom") {
+        toggleVisibility(customOptionContainer,true);
+        ([deckConfiguration, modifyDecksButton, drawSection]).forEach(element => {
+            toggleVisibility(element,false);
+        });
+    } else if (usageSelectValue === "dices") {
+        toggleVisibility(dicesOptionContainer,true);
+    } else if (usageSelectValue === "images") {
+        toggleVisibility(imagesOptionContainer,true);
     }
     
-console.log("Selection = " + UsageSelect);
+console.log("Selection = " + usageSelectValue);
 if (selectedOption) {console.log(selectedOption);}
 }
 
 // Fonction pour mettre à jour selectedOption
-function updateSelectedOption(UsageSelect) {
-console.log("Selected option: ", UsageSelect); // Ajoutez ceci pour voir l'objet sélectionné
+function updateSelectedOption(usageSelectValue) {
+console.log("Selected option: ", usageSelectValue); // Ajoutez ceci pour voir l'objet sélectionné
 console.log("Selected Option before update: ", selectedOption); // Vérifiez l'objet avant la mise à jour
     // Vider l'objet
     Object.keys(selectedOption).forEach(key => delete selectedOption[key]);
     // Assigner les nouvelles options
-    Object.assign(selectedOption, options[UsageSelect]);
+    Object.assign(selectedOption, options[usageSelectValue]);
 
     // Réinitialiser les Decks
     Decks[0] = shuffle(selectedOption.cards.numbers.slice());
@@ -103,13 +103,10 @@ function loadAppLink(selectedOption) {
         else {
             appLinkHTML = appLinks.iOS + " " + appLinks.Android;
         }
-
-        document.getElementById("app_link").innerHTML = appLinkHTML;
-        
-        document.getElementById("select_before_scoreboard").classList.add("hide");
+        appLinkContainer.innerHTML = appLinkHTML;
+        toggleVisibility(selectBeforeScoreboard,false);
     } else {
-        document.getElementById("app_link").innerHTML = "";
-        
-        document.getElementById("select_before_scoreboard").classList.remove("hide");
+        appLinkContainer.innerHTML = "";
+        toggleVisibility(selectBeforeScoreboard,true);
     }
 }

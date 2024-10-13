@@ -1,74 +1,53 @@
 document.addEventListener('DOMContentLoaded', function () {
     
     // Bouton selection liste déroulante
-    const optionButton = document.getElementById('option_list_button');
-    if (optionButton) {
-        optionButton.addEventListener('click', function() {
-            event.preventDefault();  // Empêche le rechargement de la page
-            option_choosen();
-        });
-    }
+    optionListButton.addEventListener('click', function() {
+        event.preventDefault();  // Empêche le rechargement de la page
+        option_choosen();
+    });
 
     // Réinitialiser l'état de la page lorsque le bouton de réinitialisation est cliqué
-    const resetStateButton = document.getElementById("resetStateButton");
     resetStateButton.addEventListener("click", function() {
-        resetPageState("Y");
+        resetPageState(true);
     });
     
     // Bouton draw (Welcome)
-    const drawButton = document.getElementById('drawButton');
-    if (drawButton) {
-        drawButton.addEventListener('click', function() {
-            event.preventDefault();  // Empêche le rechargement de la page
-            welcome_draw();
-        });
-    }
-    
-    // Ouverture des modals
-    function addLinkClickListener(linkId, targetId) {
-        const link = document.getElementById(linkId);
-        if (link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // Empêche le comportement par défaut du lien
-                openModal(targetId);
-            });
-        }
-    }
-
-    // Fonction pour ouvrir un modal
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('show'); // Utilise la classe pour afficher le modal
-            modal.setAttribute('aria-hidden', 'false'); // Accessibilité : indique que le modal est visible
-        }
-    }
-
-    // Fermeture des modals
-    function addModalClickListener(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.addEventListener('click', function(event) {
-                closeModal(event, modalId);
-            });
-        }
-    }
-
-    function closeModal(event, modalId) {
-        const modalContent = document.querySelector(`#${modalId} .content`);
-        if (!modalContent.contains(event.target)) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('show'); // Utilise la classe pour masquer le modal
-            modal.setAttribute('aria-hidden', 'true'); // Accessibilité : indique que le modal est masqué
-        }
-    }
-
-    // Listeners pour chaque lien
-    ['rulesbook_link', 'scoreboard_link', 'credits_link'].forEach(linkId => {
-        const targetId = linkId.replace('_link', ''); // Remplace "_link" par "" pour obtenir l'ID de modal
-        addLinkClickListener(linkId, targetId);
+    welcomeDrawButton.addEventListener('click', function() {
+        event.preventDefault();  // Empêche le rechargement de la page
+        welcome_draw();
     });
 
-    // Listeners pour chaque modal
-    ['rulesbook', 'scoreboard', 'credits'].forEach(addModalClickListener);
+    
+    // Gestion des modals
+
+    // Liste des liens et modals correspondants
+    const modalLinks = ['rulesbook', 'scoreboard', 'credits'];
+
+    // Initialisation des listeners pour chaque lien et modal
+    modalLinks.forEach(id => {
+        const linkElement = document.getElementById(`${id}_link`);
+        const modalElement = document.getElementById(`${id}_modal`);
+
+        if (linkElement && modalElement) {
+            // Ajout du listener pour ouvrir le modal au clic du lien
+            linkElement.addEventListener('click', (event) => {
+                event.preventDefault();
+                toggleModal(modalElement, true);
+            });
+
+            // Ajout du listener pour fermer le modal en cliquant en dehors du contenu
+            modalElement.addEventListener('click', (event) => {
+                const modalContent = modalElement.querySelector('.content');
+                if (!modalContent.contains(event.target)) {
+                    toggleModal(modalElement, false);
+                }
+            });
+        }
+    });
+
+    // Fonction pour ouvrir ou fermer un modal
+    function toggleModal(modalElement, open) {
+        modalElement.classList.toggle('show', open); // Ajoute ou retire la classe 'show'
+        modalElement.setAttribute('aria-hidden', !open); // Met à jour l'attribut 'aria-hidden'
+    }
 });

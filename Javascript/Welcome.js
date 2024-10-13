@@ -25,7 +25,7 @@ console.log("Image_SVG carte 3 = " + Image_SVG[2]);
         num_SVG2[i].textContent = Tirage_Carte_Num[i];
         
         if (Tirage_Carte_Action.length < 3) {Tirage_Carte_Action.push(Decks[1].pop());}
-        Image_SVG[i].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + Tirage_Carte_Action[i] + ".svg");
+        Image_SVG[i].setAttribute("xlink:href", "SVG/" + usageSelectValue + "/Actions_" + Tirage_Carte_Action[i] + ".svg");
 console.log(Image_SVG[i]);
     }
 
@@ -37,7 +37,7 @@ console.log ("Actions actuelle = " + Tirage_Carte_Action);
     for (let i2 = 0; i2 < 3; i2++) {
         
         Tirage_Carte_Action.push(Decks[1].pop());
-        Image_SVG2[i2].setAttribute("xlink:href", "SVG/" + UsageSelect + "/Actions_" + Tirage_Carte_Action[i2] + ".svg");
+        Image_SVG2[i2].setAttribute("xlink:href", "SVG/" + usageSelectValue + "/Actions_" + Tirage_Carte_Action[i2] + ".svg");
         
 console.log(Image_SVG2[i2]);
     }

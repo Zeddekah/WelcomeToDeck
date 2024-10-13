@@ -25,8 +25,8 @@ function displayRandomImage() {
     if (availableImages.length === 0) {
         if (removeAfterDisplay) {
             // Toutes les images ont été affichées, on remplace le bouton
-            randomImageButton.classList.add('hide');  // Masquer le bouton aléatoire
-            divReset.classList.remove('hide');  // Montrer le bouton de réinitialisation et le message
+            toggleVisibility(randomImageButton,false);  // Masquer le bouton aléatoire
+            toggleVisibility(divReset,true);  // Montrer le bouton de réinitialisation et le message
             return;
         }
         availableImages = [...allImages];  // Réinitialiser la liste d'images disponibles
@@ -47,8 +47,8 @@ function displayRandomImage() {
 
     // Si toutes les images ont été affichées et qu'on ne réutilise pas les images, remplacer le bouton
     if (removeAfterDisplay && availableImages.length === 0) {
-        randomImageButton.classList.add('hide');  // Masquer le bouton aléatoire
-        divReset.classList.remove('hide');  // Montrer le bouton de réinitialisation et le message
+        toggleVisibility(randomImageButton,false);  // Masquer le bouton aléatoire
+        toggleVisibility(divReset,true);  // Montrer le bouton de réinitialisation et le message
     }
 }
 
@@ -59,8 +59,8 @@ fileInput.addEventListener('change', (event) => {
         allImages = files;  // Stocker les images
         availableImages = [...allImages];  // Initialiser la liste d'images disponibles
         randomImageButton.disabled = false;  // Activer le bouton d'affichage
-        randomImageButton.classList.remove('hide');  // Montrer le bouton aléatoire
-        divReset.classList.add('hide');  // Masquer le conteneur de réinitialisation
+        toggleVisibility(randomImageButton,true);  // Montrer le bouton aléatoire
+        toggleVisibility(divReset,false);  // Masquer le conteneur de réinitialisation
         resetImageDisplay();  // Réinitialiser l'affichage de l'image
     }
 });
@@ -78,8 +78,8 @@ toggleRemove.addEventListener('change', () => {
         availableImages = [...allImages];  // Remise à zéro des images disponibles
         displayedImages = [];  // Remise à zéro des images affichées
 
-        randomImageButton.classList.remove('hide');  // Montrer le bouton aléatoire
-        divReset.classList.add('hide');  // Masquer le conteneur de réinitialisation
+        toggleVisibility(randomImageButton,true);  // Montrer le bouton aléatoire
+        toggleVisibility(divReset,false);  // Masquer le conteneur de réinitialisation
         resetImageDisplay();  // Réinitialiser l'affichage de l'image
     } else {
         // Si l'utilisateur annule, on remet l'option à son état précédent
@@ -91,7 +91,7 @@ toggleRemove.addEventListener('change', () => {
 imageResetButton.addEventListener('click', () => {
     availableImages = [...allImages];  // Réinitialiser les images disponibles
     displayedImages = [];  // Réinitialiser les images déjà affichées
-    randomImageButton.classList.remove('hide');  // Montrer le bouton aléatoire
-    divReset.classList.add('hide');  // Masquer le conteneur de réinitialisation
+    toggleVisibility(randomImageButton,true);  // Montrer le bouton aléatoire
+    toggleVisibility(divReset,false);  // Masquer le conteneur de réinitialisation
     resetImageDisplay();  // Réinitialiser l'affichage de l'image
 });

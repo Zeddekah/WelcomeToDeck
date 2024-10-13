@@ -40,15 +40,15 @@
               <option value="welcome_vegas">Welcome to Vegas</option>
               <option value="welcome_moon">Welcome to the Moon</option>
               <option value="">------</option>
-              <option value="custom">Custom (WIP)</option>
-              <option value="dices">Dices (WIP)</option>
-              <option value="images">Images (WIP)</option>
+              <option value="custom">Custom</option>
+              <option value="dices">Dices</option>
+              <option value="images">Images</option>
             </select>
             <button id="option_list_button" class="small_button">Selectionner</button>
         </form>
      </div>
 
-    <div id="deck" class="hide text-center">
+    <div id="welcome_option_container" class="hide text-center">
         <hr /><h4>Tirage :</h4>
         <div id="actuelles_cartes_svg_container">
             <svg viewBox="0 0 160 250" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@
         </div>
             <p>
                 <br />
-                <button id="drawButton">Draw a card</button>
+                <button id="welcomeDrawButton">Draw a card</button>
             </p>
         <h4>Prochaines cartes :</h4>
         <div id="prochaines_cartes_svg_container">
@@ -101,7 +101,7 @@
         </div>            
     </div>
 
-     <div id="custom_setup" class="hide">
+     <div id="custom_option_container" class="hide">
             <h2>Tirage aléatoire de dé(s)</h2>`
 
         <div id="deck-setup">
@@ -129,7 +129,7 @@
             
             <div class="height_value_40"></div>
             
-            <button id="draw_Button">Tirer les cartes</button>
+            <button id="customDrawButton">Tirer les cartes</button>
             
             <div class="height_value_40"></div>
             
@@ -198,7 +198,7 @@
         </table>
      </footer>
 
-    <div id="rulesbook" class="modal text-center">
+    <div id="rulesbook_modal" class="modal text-center">
         <div class="espace_flex"></div>
         <div class="content content_pdf">
             <h1>Livret de règles</h1>
@@ -216,16 +216,16 @@
         <div class="espace_flex"></div>
     </div>
 
-    <div id="scoreboard" class="modal text-center">
+    <div id="scoreboard_modal" class="modal text-center">
         <div class="content">
             <h1>Feuille de score (App Mobile)</h1>
             <p id="select_before_scoreboard">No Mobile App for this selection</p>
-            <p id="app_link" class="text-center"></p>
+            <p id="app_link_container" class="text-center"></p>
             <a href="#" class="close">&times;</a>
         </div>
     </div>
 
-    <div id="credits" class="modal">
+    <div id="credits_modal" class="modal">
         <div class="content">
             <h1>Credits</h1>
             <ul>

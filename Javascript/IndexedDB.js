@@ -9,15 +9,6 @@ document.querySelectorAll('div').forEach((element) => {
     });
 });
 
-// Fonction pour gérer la classe 'hide'
-function toggleVisibility(element, shouldBeVisible) {
-    if (shouldBeVisible) {
-        element.classList.remove('hide'); // Rendre visible
-    } else {
-        element.classList.add('hide'); // Cacher
-    }
-}
-
 // Fonction pour réinitialiser l'état à l'état d'origine
 function resetHide() {
     originalState.forEach(({ element, isVisible }) => {
@@ -59,9 +50,9 @@ function saveAllState() {
             Tirage_Carte_Action
         },
         elements: {
-            actuelles_cartes_svg: document.getElementById("actuelles_cartes_svg_container").innerHTML,
-            prochaines_cartes_svg: document.getElementById("prochaines_cartes_svg_container").innerHTML,
-            usage_select_value: document.getElementById("usage_select").value
+            actuelles_cartes_svg: currentCardsContainer.innerHTML,
+            prochaines_cartes_svg: nextCardsContainer.innerHTML,
+            usage_select_value: usageSelect.value
         },
         hides: {}
     };
@@ -99,16 +90,13 @@ function restoreAllState() {
 
         if (state) {
             // Restauration des variables
-            document.getElementById("usage_select").value = state.elements.usage_select_value;
+            usageSelect.value = state.elements.usage_select_value;
 
             if (options[state.elements.usage_select_value]) {
                 Decks = state.variables.Decks;
                 Tirage_Carte_Action = state.variables.Tirage_Carte_Action;
-
-                document.getElementById("actuelles_cartes_svg_container").innerHTML =
-                    state.elements.actuelles_cartes_svg;
-                document.getElementById("prochaines_cartes_svg_container").innerHTML =
-                    state.elements.prochaines_cartes_svg;
+                currentCardsContainer.innerHTML = state.elements.actuelles_cartes_svg;
+                nextCardsContainer.innerHTML = state.elements.prochaines_cartes_svg;
             } else if (options === "custom") {
                 // Logique personnalisée ici
             } else if (options === "dices") {
@@ -136,20 +124,20 @@ function restoreAllState() {
 }
 
 // Fonction pour réinitialiser l'état de la page dans IndexedDB
-function resetPageState(refresh_page) {
-    let transaction = db.transaction(["pageState"], "readwrite");
-    let objectStore = transaction.objectStore("pageState");
+function resetPageState(refreshPage = false) {
+    const transaction = db.transaction(["pageState"], "readwrite");
+    const objectStore = transaction.objectStore("pageState");
 
-    let request = objectStore.delete("pageState"); // Supprime l'état sauvegardé
-
-    request.onsuccess = function () {
+    objectStore.delete("pageState").onsuccess = function () {
         console.log("État réinitialisé dans IndexedDB");
-        if (refresh_page) {
-            location.reload();
-        } // Recharge la page après la réinitialisation
+
+        // Recharge la page après la réinitialisation
+        if (refreshPage) {
+            location.reload(); 
+        }
     };
 
-    request.onerror = function (event) {
+    objectStore.delete("pageState").onerror = function (event) {
         console.error("Erreur lors de la réinitialisation:", event.target.error);
     };
 }
