@@ -8,7 +8,7 @@
 - **Options personnalisées** : Possibilité de personnaliser les cartes tirées ou d'ajouter de nouveaux éléments comme des dés ou des images.
 - **Affichage de PDF** : Intégration d'un visualiseur de PDF pour afficher les livrets de règles.
 - **Gestion de plusieurs decks** : Vous pouvez configurer et gérer plusieurs decks pour personnaliser encore plus votre expérience de jeu.
-- **Sauvegarde de l'état de la page** : L'état de la page est sauvegardé automatiquement dans une base de donnée IndexedDB. Un bouton "Réinitialiser les configurations" est présent pour reinitialiser l'état de la page.
+- WIP **Sauvegarde de l'état de la page** : L'état de la page est sauvegardé automatiquement dans une base de donnée IndexedDB. Un bouton "Réinitialiser les configurations" est présent pour reinitialiser l'état de la page.
 
 ## Prérequis
 
