@@ -67,4 +67,4 @@ Ce projet est sous licence MIT. Veuillez consulter le fichier `LICENSE` pour plu
 
 ## Remerciements
 
-Ce fichier README a été créé avec l'aide de [ChatGPT](https://openai.com/chatgpt).
+Ce fichier README et certaines parties de code ont été créées avec l'aide de [ChatGPT](https://openai.com/chatgpt).
