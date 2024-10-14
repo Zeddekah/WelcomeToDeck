@@ -8,6 +8,7 @@
 - **Options personnalisées** : Possibilité de personnaliser les cartes tirées ou d'ajouter de nouveaux éléments comme des dés ou des images.
 - **Affichage de PDF** : Intégration d'un visualiseur de PDF pour afficher les livrets de règles.
 - **Gestion de plusieurs decks** : Vous pouvez configurer et gérer plusieurs decks pour personnaliser encore plus votre expérience de jeu.
+- **Sauvegarde de l'état de la page** : L'état de la page est sauvegardé automatiquement dans une base de donnée IndexedDB. Un bouton "Réinitialiser les configurations" est présent pour reinitialiser l'état de la page.
 
 ## Prérequis
 
@@ -42,8 +43,6 @@ https://zeddekah.github.io/WelcomeToDeck/
    - **Custom** : Créez des decks avec un contenu texte personnalisé, puis cliquez sur "Draw a card" pour tirer une carte virtuelle.
    - **Dés** : Ajoutez des dés et cliquez sur "Générer un nouveau tirage".
    - **Images** : Importez des images et cliquez sur "Afficher une image aléatoire".
-4. - Les configurations et l'avancement du tirage sont sauvegardés automatiquement dans une base de donnée IndexedDB.
-   - Pour réinitialiser la base de donnée IndexedDB, cliquez sur le bouton "Réinitialiser les configurations".
 
 ## Structure du Projet
 
